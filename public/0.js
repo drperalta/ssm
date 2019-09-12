@@ -27,6 +27,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {};
@@ -48,6 +49,8 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _PostListComponent__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./PostListComponent */ "./resources/js/components/Main/PostListComponent.vue");
+//
+//
 //
 //
 //
@@ -160,6 +163,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -195,6 +202,12 @@ __webpack_require__.r(__webpack_exports__);
         postTime: '56sec'
       }]
     };
+  },
+  methods: {
+    editPost: function editPost() {// 
+    },
+    deletePost: function deletePost() {// 
+    }
   }
 });
 
@@ -242,6 +255,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_Main_NavbarComponent__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../components/Main/NavbarComponent */ "./resources/js/components/Main/NavbarComponent.vue");
 /* harmony import */ var _components_Main_UserCardComponent__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/Main/UserCardComponent */ "./resources/js/components/Main/UserCardComponent.vue");
 /* harmony import */ var _components_Main_PostComponent__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/Main/PostComponent */ "./resources/js/components/Main/PostComponent.vue");
+//
+//
+//
 //
 //
 //

@@ -1,15 +1,18 @@
 <template>
     <div class="post-list-component">
         <a-card class="card" v-for="(post, index) in postList" :key="index">
+            <!-- User Avatar -->
             <span class="mr1" style="float: left">
                 <a-avatar class="avatar" :size="40" icon="user" />
             </span>
             <span>
                 <a-row class="row">
+                    <!-- Fullname and Username -->
                     <a-col :xs="22" :sm="23">
                         <span class="fullname">{{post.name}}</span>
                         <span class="username">@{{post.username}}</span>
                     </a-col>
+                    <!-- Post Options -->
                     <a-col :xs="2" :sm="1">
                         <a-dropdown class="post-options" :trigger="['click']" placement="bottomRight">
                             <a class="ant-dropdown-link" href="#">
@@ -25,10 +28,11 @@
                             </a-menu>
                         </a-dropdown>
                     </a-col>
+                    <!-- Post Time -->
                     <a-col span="24">
                         <span class="post-time">{{ post.postTime }} ago</span>
                     </a-col>
-
+                    <!-- Post Content -->
                     <a-col span="24">
                         <p class="post-content">{{ post.postContent }}</p>
                     </a-col>
@@ -79,6 +83,14 @@ export default {
                     postTime: '56sec'
                 }
             ]
+        }
+    },
+    methods: {
+        editPost(){
+            // 
+        },
+        deletePost(){
+            // 
         }
     }
 }

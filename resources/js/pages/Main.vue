@@ -3,6 +3,7 @@
         <a-layout style="background: transparent;">
             <a-layout-header>
                 <div class="header">
+                    <!-- Navbar Component -->
                     <NavbarComponent></NavbarComponent>
                 </div>
             </a-layout-header>  
@@ -10,11 +11,13 @@
             <a-layout-content>
                 <div class="content p1">
                     <a-row :gutter="16">
-                        <a-col :xs="24" :sm="9">    
+                        <a-col :xs="24" :sm="9">
+                               <!-- User Card Component -->
                             <UserCardComponent></UserCardComponent>
                         </a-col>
                         <a-col :xs="24" :sm="0" ><div style="margin: 8px"></div></a-col>
                         <a-col :xs="24" :sm="15">
+                            <!-- Post Component -->
                             <PostComponent ></PostComponent>   
                         </a-col>
                     </a-row>

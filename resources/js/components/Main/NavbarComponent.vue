@@ -3,6 +3,7 @@
         <!-- Logo -->
         <img class="item logo" src="../../../assets/img/ssm-logo.png" alt="">
 
+        <!-- User Avatar and Options -->
         <a-dropdown class="avatar" :trigger="['click']" placement="bottomRight">
             <a class="ant-dropdown-link" href="#">
                 <a-avatar icon="user"/>

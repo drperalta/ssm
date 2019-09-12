@@ -8,9 +8,9 @@
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
-
+        <link href="https://unpkg.com/basscss@8.0.2/css/basscss.min.css" rel="stylesheet">
     </head>
-    <body>
+    <body style="background: #f7fdff;">
         <div id="app">
             <App></App>
         </div>

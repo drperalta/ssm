@@ -1,11 +1,18 @@
 <template>
     <div class="login-component">
-        LOGIN
-        <a-button type="primary">Primary</a-button>
-        <a-button>Default</a-button>
-        <a-button type="dashed">Dashed</a-button>
-        <a-button type="danger">Danger</a-button>
-        <a-button type="link">Link</a-button>
+        <div class="mb2">SIGN IN</div>
+
+        <a-form @submit="login">
+            <a-form-item>
+                <a-input placeholder="Username" v-model="loginForm.username"/>
+            </a-form-item>
+            <a-form-item>
+                <a-input placeholder="Password" type="password" v-model="loginForm.password"/>
+            </a-form-item>
+
+            <a-button class="mt3 mb1" type="primary" html-type="submit" block>Login</a-button>
+            <router-link :to="{ name: 'Register'}">Need and account? Sign up</router-link>
+        </a-form>
     </div>
 </template>
 
@@ -13,12 +20,22 @@
 export default {
     data(){
         return{
-
+            loginForm: {
+                username: '',
+                password: ''
+            }
+        }
+    },
+    methods: {
+        login(){
+            // 
         }
     }
 }
 </script>
 
-<style lang="scss">
-    
+<style lang="less">
+.ant-form-item{
+    margin-bottom: 0px !important;
+}
 </style>

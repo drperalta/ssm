@@ -1,6 +1,6 @@
 <template>
     <div class="login-component">
-        
+        REGISTER
     </div>
 </template>
 

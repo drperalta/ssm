@@ -15,6 +15,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {};
@@ -38,9 +39,12 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "index-page" }, [
-    _vm._v("\n    INDEX PAGE\n")
-  ])
+  return _c(
+    "div",
+    { staticClass: "index-page" },
+    [_vm._v("\n    INDEX PAGE\n    "), _c("router-view")],
+    1
+  )
 }
 var staticRenderFns = []
 render._withStripped = true

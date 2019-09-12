@@ -10,7 +10,20 @@ let router = new VueRouter({
         {
             path: '/',
             name: 'Index',
-            component: () => import('../pages/Index.vue')
+            component: () => import('../pages/Index.vue'),
+            redirect: { name: 'Login' },
+            children: [
+                {
+                    path: '/',
+                    name: 'Login',
+                    component: () => import('../components/Index/Login.vue')
+                },
+                {
+                    path: '/register',
+                    name: 'Register',
+                    component: () => import('../components/Index/Register.vue')
+                }
+            ]
         }
     ]
 })

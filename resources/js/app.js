@@ -1,6 +1,6 @@
 window.Vue = require('vue');
 
-import App from './pages/App.vue'
+import App from './App.vue'
 import router from './router'
 
 // Ant Design Vue

@@ -7,6 +7,7 @@ let router = new VueRouter({
     mode: 'history',
 
     routes: [
+        // INDEX
         {
             path: '/',
             name: 'Index',
@@ -24,6 +25,12 @@ let router = new VueRouter({
                     component: () => import('../components/Index/Register.vue')
                 }
             ]
+        },
+        // MAIN
+        {
+            path: '/main',
+            name: 'Main',
+            component: () => import('../pages/Main.vue')
         }
     ]
 })

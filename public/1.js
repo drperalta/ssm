@@ -201,7 +201,7 @@ var render = function() {
             "a-form-item",
             [
               _c("a-input", {
-                attrs: { placeholder: "Password" },
+                attrs: { placeholder: "Password", type: "password" },
                 model: {
                   value: _vm.registerForm.password,
                   callback: function($$v) {
@@ -218,7 +218,7 @@ var render = function() {
             "a-form-item",
             [
               _c("a-input", {
-                attrs: { placeholder: "Confirm Password" },
+                attrs: { placeholder: "Confirm Password", type: "password" },
                 model: {
                   value: _vm.registerForm.confirmPassword,
                   callback: function($$v) {

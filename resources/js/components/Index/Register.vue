@@ -16,10 +16,10 @@
                 <a-divider class="divider" type="horizontal" />
             </div>
             <a-form-item>
-                <a-input placeholder="Password" v-model="registerForm.password"></a-input>
+                <a-input placeholder="Password" v-model="registerForm.password" type="password"></a-input>
             </a-form-item>
             <a-form-item>
-                <a-input placeholder="Confirm Password" v-model="registerForm.confirmPassword"></a-input>
+                <a-input placeholder="Confirm Password" v-model="registerForm.confirmPassword" type="password"></a-input>
             </a-form-item>
 
             <a-button class="mt3 mb1" type="primary" html-type="submit" block>Register</a-button>

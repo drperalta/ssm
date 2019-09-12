@@ -37,7 +37,8 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
-    login: function login() {// 
+    login: function login() {
+      Vue.auth.login(this, this.loginForm);
     }
   }
 });
@@ -116,7 +117,14 @@ var render = function() {
       _vm._v(" "),
       _c(
         "a-form",
-        { on: { submit: _vm.login } },
+        {
+          on: {
+            submit: function($event) {
+              $event.preventDefault()
+              return _vm.login($event)
+            }
+          }
+        },
         [
           _c(
             "a-form-item",

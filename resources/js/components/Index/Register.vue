@@ -2,7 +2,7 @@
     <div class="register-component">
         <div class="mb2">SIGN UP</div>
 
-        <a-form @submit="register">
+        <a-form @submit.prevent="register">
             <a-form-item>
                 <a-input placeholder="Full Name" v-model="registerForm.fullname"></a-input>
             </a-form-item>
@@ -43,7 +43,7 @@ export default {
     },
     methods: {
         register(){
-            alert('REGISTER')
+            Vue.auth.register(this, this.registerForm)
         }
     }
 }

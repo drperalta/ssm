@@ -53,7 +53,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     register: function register() {
-      alert('REGISTER');
+      Vue.auth.register(this, this.registerForm);
     }
   }
 });
@@ -132,7 +132,14 @@ var render = function() {
       _vm._v(" "),
       _c(
         "a-form",
-        { on: { submit: _vm.register } },
+        {
+          on: {
+            submit: function($event) {
+              $event.preventDefault()
+              return _vm.register($event)
+            }
+          }
+        },
         [
           _c(
             "a-form-item",

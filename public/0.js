@@ -332,7 +332,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, ".post-component .float-left {\n  float: left !important;\n}\n", ""]);
+exports.push([module.i, ".post-component .ant-card-body {\n  padding: 16px 16px 10px 16px;\n}\n.post-component .float-left {\n  float: left !important;\n}\n", ""]);
 
 // exports
 

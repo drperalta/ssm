@@ -65,6 +65,9 @@ export default {
 
 <style lang="less">
 .post-component{
+    .ant-card-body{
+        padding: 16px 16px 10px 16px;
+    }
     .float-left{
         float: left !important;
     }

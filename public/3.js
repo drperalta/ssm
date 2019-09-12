@@ -39,9 +39,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
+      alert: {
+        error: '',
+        success: ''
+      },
       registerForm: {
         fullname: '',
         email: '',
@@ -53,7 +60,21 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     register: function register() {
+      this.clearAlert();
       Vue.auth.register(this, this.registerForm);
+    },
+    clearAlert: function clearAlert() {
+      this.alert.error = '';
+      this.alert.success = '';
+    },
+    clearForm: function clearForm() {
+      this.registerForm = {
+        fullname: '',
+        email: '',
+        username: '',
+        password: '',
+        confirmPassword: ''
+      };
     }
   }
 });
@@ -129,6 +150,16 @@ var render = function() {
     { staticClass: "register-component" },
     [
       _c("div", { staticClass: "mb2" }, [_vm._v("SIGN UP")]),
+      _vm._v(" "),
+      _vm.alert.error
+        ? _c("a-alert", { attrs: { message: _vm.alert.error, type: "error" } })
+        : _vm._e(),
+      _vm._v(" "),
+      _vm.alert.success
+        ? _c("a-alert", {
+            attrs: { message: _vm.alert.success, type: "success" }
+          })
+        : _vm._e(),
       _vm._v(" "),
       _c(
         "a-form",

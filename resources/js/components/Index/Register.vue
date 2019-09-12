@@ -2,6 +2,9 @@
     <div class="register-component">
         <div class="mb2">SIGN UP</div>
 
+        <a-alert :message="alert.error" type="error" v-if="alert.error"/>
+        <a-alert :message="alert.success" type="success" v-if="alert.success"/>
+
         <a-form @submit.prevent="register">
             <a-form-item>
                 <a-input placeholder="Full Name" v-model="registerForm.fullname"></a-input>
@@ -32,6 +35,10 @@
 export default {    
     data(){
         return{
+            alert:{
+                error: '',
+                success: ''
+            },
             registerForm: {
                 fullname: '',
                 email: '',
@@ -43,7 +50,21 @@ export default {
     },
     methods: {
         register(){
+            this.clearAlert();
             Vue.auth.register(this, this.registerForm)
+        },
+        clearAlert(){
+            this.alert.error = ''
+            this.alert.success = ''
+        },
+        clearForm(){
+            this.registerForm = {
+                fullname: '',
+                email: '',
+                username: '',
+                password: '',
+                confirmPassword: ''
+            }
         }
     }
 }

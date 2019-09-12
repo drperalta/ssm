@@ -1,7 +1,7 @@
 <template>
     <div class="login-component">
         <div class="mb2">SIGN IN</div>
-
+        
         <a-form @submit.prevent="login">
             <a-form-item>
                 <a-input placeholder="Username" v-model="loginForm.username"/>

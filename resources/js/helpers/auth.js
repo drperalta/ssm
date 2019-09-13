@@ -7,7 +7,7 @@ export default function(Vue){
                 const result = await axios.post('/api/auth/register', payload);
 
                 context.alert.success = result.data.message;
-                context.clearForm();
+                context.form = context.$form.createForm(context);
             }
             catch(err){
                 let error = Object.values(err.response.data.errors);

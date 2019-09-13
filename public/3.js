@@ -42,6 +42,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -49,33 +52,67 @@ __webpack_require__.r(__webpack_exports__);
         error: '',
         success: ''
       },
-      registerForm: {
-        fullname: '',
-        email: '',
-        username: '',
-        password: '',
-        confirmPassword: ''
+      validationRules: {
+        fullname: {
+          rules: [{
+            required: true,
+            message: 'Fullname is required'
+          }]
+        },
+        email: {
+          rules: [{
+            required: true,
+            message: 'Email is required'
+          }, {
+            type: 'email',
+            message: 'Email is not a valid email'
+          }]
+        },
+        username: {
+          rules: [{
+            required: true,
+            message: 'Username is required'
+          }]
+        },
+        password: {
+          rules: [{
+            required: true,
+            message: 'Password is required'
+          }, {
+            min: 6,
+            message: 'Password must be at least 6 characters'
+          }]
+        },
+        confirmPassword: {
+          rules: [{
+            required: true,
+            message: 'Confirm Password is required'
+          }, {
+            min: 6,
+            message: 'Password must be at least 6 characters'
+          }]
+        }
       }
     };
   },
   methods: {
     register: function register() {
+      var _this = this;
+
       this.clearAlert();
-      Vue.auth.register(this, this.registerForm);
+      this.form.validateFields(function (err, data) {
+        if (!err) {
+          Vue.auth.register(_this, data);
+        }
+      });
     },
     clearAlert: function clearAlert() {
       this.alert.error = '';
       this.alert.success = '';
-    },
-    clearForm: function clearForm() {
-      this.registerForm = {
-        fullname: '',
-        email: '',
-        username: '',
-        password: '',
-        confirmPassword: ''
-      };
     }
+  },
+  beforeCreate: function beforeCreate() {
+    this.form = this.$form.createForm(this);
   }
 });
 
@@ -93,7 +130,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, ".register-component .ant-form .ant-form-item {\n  margin-bottom: 0px !important;\n}\n.register-component .divider-container {\n  padding: 0px 15px;\n}\n.register-component .divider-container .divider {\n  margin: 8px 0px;\n}", ""]);
+exports.push([module.i, ".register-component .ant-form .ant-form-item {\n  margin-bottom: 0px !important;\n}\n.register-component .ant-form .ant-form-item .ant-form-explain {\n  text-align: left;\n}\n.register-component .divider-container {\n  padding: 0px 15px;\n}\n.register-component .divider-container .divider {\n  margin: 8px 0px;\n}", ""]);
 
 // exports
 
@@ -151,19 +188,29 @@ var render = function() {
     [
       _c("div", { staticClass: "mb2" }, [_vm._v("SIGN UP")]),
       _vm._v(" "),
-      _vm.alert.error
-        ? _c("a-alert", { attrs: { message: _vm.alert.error, type: "error" } })
-        : _vm._e(),
-      _vm._v(" "),
-      _vm.alert.success
-        ? _c("a-alert", {
-            attrs: { message: _vm.alert.success, type: "success" }
-          })
-        : _vm._e(),
+      _c(
+        "div",
+        { staticClass: "mb1" },
+        [
+          _vm.alert.error
+            ? _c("a-alert", {
+                attrs: { message: _vm.alert.error, type: "error" }
+              })
+            : _vm._e(),
+          _vm._v(" "),
+          _vm.alert.success
+            ? _c("a-alert", {
+                attrs: { message: _vm.alert.success, type: "success" }
+              })
+            : _vm._e()
+        ],
+        1
+      ),
       _vm._v(" "),
       _c(
         "a-form",
         {
+          attrs: { form: _vm.form },
           on: {
             submit: function($event) {
               $event.preventDefault()
@@ -174,16 +221,18 @@ var render = function() {
         [
           _c(
             "a-form-item",
+            { attrs: { hasFeedback: "" } },
             [
               _c("a-input", {
-                attrs: { placeholder: "Full Name" },
-                model: {
-                  value: _vm.registerForm.fullname,
-                  callback: function($$v) {
-                    _vm.$set(_vm.registerForm, "fullname", $$v)
-                  },
-                  expression: "registerForm.fullname"
-                }
+                directives: [
+                  {
+                    name: "decorator",
+                    rawName: "v-decorator",
+                    value: ["fullname", _vm.validationRules.fullname],
+                    expression: "['fullname', validationRules.fullname]"
+                  }
+                ],
+                attrs: { placeholder: "Full Name", id: "fullname" }
               })
             ],
             1
@@ -191,16 +240,18 @@ var render = function() {
           _vm._v(" "),
           _c(
             "a-form-item",
+            { attrs: { hasFeedback: "" } },
             [
               _c("a-input", {
-                attrs: { placeholder: "Email" },
-                model: {
-                  value: _vm.registerForm.email,
-                  callback: function($$v) {
-                    _vm.$set(_vm.registerForm, "email", $$v)
-                  },
-                  expression: "registerForm.email"
-                }
+                directives: [
+                  {
+                    name: "decorator",
+                    rawName: "v-decorator",
+                    value: ["email", _vm.validationRules.email],
+                    expression: "['email', validationRules.email]"
+                  }
+                ],
+                attrs: { placeholder: "Email" }
               })
             ],
             1
@@ -208,16 +259,18 @@ var render = function() {
           _vm._v(" "),
           _c(
             "a-form-item",
+            { attrs: { hasFeedback: "" } },
             [
               _c("a-input", {
-                attrs: { placeholder: "Username" },
-                model: {
-                  value: _vm.registerForm.username,
-                  callback: function($$v) {
-                    _vm.$set(_vm.registerForm, "username", $$v)
-                  },
-                  expression: "registerForm.username"
-                }
+                directives: [
+                  {
+                    name: "decorator",
+                    rawName: "v-decorator",
+                    value: ["username", _vm.validationRules.username],
+                    expression: "['username', validationRules.username]"
+                  }
+                ],
+                attrs: { placeholder: "Username" }
               })
             ],
             1
@@ -237,16 +290,18 @@ var render = function() {
           _vm._v(" "),
           _c(
             "a-form-item",
+            { attrs: { hasFeedback: "" } },
             [
               _c("a-input", {
-                attrs: { placeholder: "Password", type: "password" },
-                model: {
-                  value: _vm.registerForm.password,
-                  callback: function($$v) {
-                    _vm.$set(_vm.registerForm, "password", $$v)
-                  },
-                  expression: "registerForm.password"
-                }
+                directives: [
+                  {
+                    name: "decorator",
+                    rawName: "v-decorator",
+                    value: ["password", _vm.validationRules.password],
+                    expression: "['password', validationRules.password]"
+                  }
+                ],
+                attrs: { placeholder: "Password", type: "password" }
               })
             ],
             1
@@ -254,16 +309,22 @@ var render = function() {
           _vm._v(" "),
           _c(
             "a-form-item",
+            { attrs: { hasFeedback: "" } },
             [
               _c("a-input", {
-                attrs: { placeholder: "Confirm Password", type: "password" },
-                model: {
-                  value: _vm.registerForm.confirmPassword,
-                  callback: function($$v) {
-                    _vm.$set(_vm.registerForm, "confirmPassword", $$v)
-                  },
-                  expression: "registerForm.confirmPassword"
-                }
+                directives: [
+                  {
+                    name: "decorator",
+                    rawName: "v-decorator",
+                    value: [
+                      "confirmPassword",
+                      _vm.validationRules.confirmPassword
+                    ],
+                    expression:
+                      "['confirmPassword', validationRules.confirmPassword]"
+                  }
+                ],
+                attrs: { placeholder: "Confirm Password", type: "password" }
               })
             ],
             1

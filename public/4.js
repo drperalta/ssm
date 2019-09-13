@@ -43,15 +43,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
-    ValidationProvider: vee_validate__WEBPACK_IMPORTED_MODULE_0__["ValidationProvider"],
-    ValidationObserver: vee_validate__WEBPACK_IMPORTED_MODULE_0__["ValidationObserver"]
+    ValidationProvider: vee_validate__WEBPACK_IMPORTED_MODULE_0__["ValidationProvider"]
   },
   data: function data() {
     return {
@@ -72,25 +67,6 @@ __webpack_require__.r(__webpack_exports__);
     register: function register() {
       this.clearAlert();
       Vue.auth.register(this, this.registerForm);
-    },
-    resolveState: function resolveState(_ref) {
-      var errors = _ref.errors,
-          flags = _ref.flags;
-      console.log(flags);
-
-      if (errors[0]) {
-        return 'error';
-      }
-
-      if (flags.pending) {
-        return 'validating';
-      }
-
-      if (flags.valid) {
-        return 'success';
-      }
-
-      return '';
     },
     clearAlert: function clearAlert() {
       this.alert.error = '';
@@ -191,157 +167,133 @@ var render = function() {
         : _vm._e(),
       _vm._v(" "),
       _c(
-        "ValidationObserver",
-        { ref: "observer" },
+        "a-form",
+        {
+          on: {
+            submit: function($event) {
+              $event.preventDefault()
+              return _vm.register($event)
+            }
+          }
+        },
         [
           _c(
-            "a-form",
-            {
-              on: {
-                submit: function($event) {
-                  $event.preventDefault()
-                  return _vm.register($event)
-                }
-              }
-            },
+            "a-form-item",
             [
-              _c("ValidationProvider", {
-                attrs: { name: "Fullname", rules: "required|max:255" },
-                scopedSlots: _vm._u([
+              _c("a-input", {
+                directives: [
                   {
-                    key: "default",
-                    fn: function(ref) {
-                      var errors = ref.errors
-                      var flags = ref.flags
-                      return _c(
-                        "a-form-item",
-                        {
-                          attrs: {
-                            hasFeedback: "",
-                            validateStatus: _vm.resolveState({
-                              errors: errors,
-                              flags: flags
-                            }),
-                            help: errors[0]
-                          }
-                        },
-                        [
-                          _c("a-input", {
-                            attrs: { placeholder: "Full Name" },
-                            model: {
-                              value: _vm.registerForm.fullname,
-                              callback: function($$v) {
-                                _vm.$set(_vm.registerForm, "fullname", $$v)
-                              },
-                              expression: "registerForm.fullname"
-                            }
-                          })
-                        ],
-                        1
-                      )
-                    }
+                    name: "validate",
+                    rawName: "v-validate",
+                    value: "required",
+                    expression: "'required'"
                   }
-                ])
-              }),
-              _vm._v(" "),
-              _c(
-                "a-form-item",
-                [
-                  _c("a-input", {
-                    attrs: { placeholder: "Email" },
-                    model: {
-                      value: _vm.registerForm.email,
-                      callback: function($$v) {
-                        _vm.$set(_vm.registerForm, "email", $$v)
-                      },
-                      expression: "registerForm.email"
-                    }
-                  })
                 ],
-                1
-              ),
-              _vm._v(" "),
-              _c(
-                "a-form-item",
-                [
-                  _c("a-input", {
-                    attrs: { placeholder: "Username" },
-                    model: {
-                      value: _vm.registerForm.username,
-                      callback: function($$v) {
-                        _vm.$set(_vm.registerForm, "username", $$v)
-                      },
-                      expression: "registerForm.username"
-                    }
-                  })
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c(
-                "div",
-                { staticClass: "divider-container" },
-                [
-                  _c("a-divider", {
-                    staticClass: "divider",
-                    attrs: { type: "horizontal" }
-                  })
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c(
-                "a-form-item",
-                [
-                  _c("a-input", {
-                    attrs: { placeholder: "Password", type: "password" },
-                    model: {
-                      value: _vm.registerForm.password,
-                      callback: function($$v) {
-                        _vm.$set(_vm.registerForm, "password", $$v)
-                      },
-                      expression: "registerForm.password"
-                    }
-                  })
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c(
-                "a-form-item",
-                [
-                  _c("a-input", {
-                    attrs: {
-                      placeholder: "Confirm Password",
-                      type: "password"
-                    },
-                    model: {
-                      value: _vm.registerForm.confirmPassword,
-                      callback: function($$v) {
-                        _vm.$set(_vm.registerForm, "confirmPassword", $$v)
-                      },
-                      expression: "registerForm.confirmPassword"
-                    }
-                  })
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c(
-                "a-button",
-                {
-                  staticClass: "mt3 mb1",
-                  attrs: { type: "primary", "html-type": "submit", block: "" }
-                },
-                [_vm._v("Register")]
-              ),
-              _vm._v(" "),
-              _c("router-link", { attrs: { to: { name: "Login" } } }, [
-                _vm._v("Already have an account? Sign In")
-              ])
+                attrs: { placeholder: "Full Name" },
+                model: {
+                  value: _vm.registerForm.fullname,
+                  callback: function($$v) {
+                    _vm.$set(_vm.registerForm, "fullname", $$v)
+                  },
+                  expression: "registerForm.fullname"
+                }
+              })
             ],
             1
-          )
+          ),
+          _vm._v(" "),
+          _c(
+            "a-form-item",
+            [
+              _c("a-input", {
+                attrs: { placeholder: "Email" },
+                model: {
+                  value: _vm.registerForm.email,
+                  callback: function($$v) {
+                    _vm.$set(_vm.registerForm, "email", $$v)
+                  },
+                  expression: "registerForm.email"
+                }
+              })
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "a-form-item",
+            [
+              _c("a-input", {
+                attrs: { placeholder: "Username" },
+                model: {
+                  value: _vm.registerForm.username,
+                  callback: function($$v) {
+                    _vm.$set(_vm.registerForm, "username", $$v)
+                  },
+                  expression: "registerForm.username"
+                }
+              })
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticClass: "divider-container" },
+            [
+              _c("a-divider", {
+                staticClass: "divider",
+                attrs: { type: "horizontal" }
+              })
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "a-form-item",
+            [
+              _c("a-input", {
+                attrs: { placeholder: "Password", type: "password" },
+                model: {
+                  value: _vm.registerForm.password,
+                  callback: function($$v) {
+                    _vm.$set(_vm.registerForm, "password", $$v)
+                  },
+                  expression: "registerForm.password"
+                }
+              })
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "a-form-item",
+            [
+              _c("a-input", {
+                attrs: { placeholder: "Confirm Password", type: "password" },
+                model: {
+                  value: _vm.registerForm.confirmPassword,
+                  callback: function($$v) {
+                    _vm.$set(_vm.registerForm, "confirmPassword", $$v)
+                  },
+                  expression: "registerForm.confirmPassword"
+                }
+              })
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "a-button",
+            {
+              staticClass: "mt3 mb1",
+              attrs: { type: "primary", "html-type": "submit", block: "" }
+            },
+            [_vm._v("Register")]
+          ),
+          _vm._v(" "),
+          _c("router-link", { attrs: { to: { name: "Login" } } }, [
+            _vm._v("Already have an account? Sign In")
+          ])
         ],
         1
       )

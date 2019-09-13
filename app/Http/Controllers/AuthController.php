@@ -9,7 +9,7 @@ use App\User;
 class AuthController extends Controller
 {
     public function register(Request $request){
-
+        
         $this->validate($request, [
             'fullname' => 'required|max:255',
             'email' => 'required|email|unique:users|max:255',

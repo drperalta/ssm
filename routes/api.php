@@ -13,6 +13,7 @@ use Illuminate\Http\Request;
 |
 */
 
+// AUTHENTICATION ROUTES
 Route::group([ 'prefix' => 'auth'], function() {
     Route::post('login','AuthController@login');
     Route::post('register','AuthController@register');
@@ -23,6 +24,10 @@ Route::group([ 'prefix' => 'auth'], function() {
     });
 });
 
+// USER ROUTES
 Route::group([ 'middleware' => 'auth:api', 'prefix' => 'user'], function() {
     Route::get('information', 'UserController@user');
 });
+
+// POST ROUTES
+Route::resource('post', 'PostController')->middleware('auth:api');

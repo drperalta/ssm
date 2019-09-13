@@ -1,6 +1,6 @@
 <template>
     <div class="post-list-component">
-        <a-card class="card" v-for="(post, index) in postList" :key="index">
+        <a-card class="card" v-for="(post, index) in posts" :key="index">
             <!-- User Avatar -->
             <span class="mr1" style="float: left">
                 <a-avatar class="avatar" :size="40" icon="user" />
@@ -9,32 +9,32 @@
                 <a-row class="row">
                     <!-- Fullname and Username -->
                     <a-col :xs="22" :sm="23">
-                        <span class="fullname">{{post.name}}</span>
+                        <span class="fullname">{{post.fullname}}</span>
                         <span class="username">@{{post.username}}</span>
                     </a-col>
                     <!-- Post Options -->
                     <a-col :xs="2" :sm="1">
-                        <a-dropdown class="post-options" :trigger="['click']" placement="bottomRight">
+                        <a-dropdown class="post-options" :trigger="['click']" placement="bottomRight" v-if="userPost(post.user_id)">
                             <a class="ant-dropdown-link" href="#">
                                 <a-button type="link" shape="circle" icon="ellipsis" size="small"></a-button>
                             </a>
                             <a-menu slot="overlay">
                                 <a-menu-item>
-                                    <a @click="editPost">Edit</a>
+                                    <a @click="editPost(post.id)">Edit</a>
                                 </a-menu-item>
                                 <a-menu-item>
-                                    <a @click="deletePost">Delete</a>
+                                    <a @click="deletePost(post.id)">Delete</a>
                                 </a-menu-item>
                             </a-menu>
                         </a-dropdown>
                     </a-col>
                     <!-- Post Time -->
                     <a-col span="24">
-                        <span class="post-time">{{ post.postTime }} ago</span>
+                        <span class="post-time">{{ timePosted(post.created_at) }} ago</span>
                     </a-col>
                     <!-- Post Content -->
                     <a-col span="24">
-                        <p class="post-content">{{ post.postContent }}</p>
+                        <p class="post-content">{{ post.post }}</p>
                     </a-col>
                 </a-row>
             </span>
@@ -85,13 +85,30 @@ export default {
             ]
         }
     },
+    computed:{
+        posts(){
+            return this.$store.state.posts
+        }
+    },
     methods: {
+        getPost(){
+            Vue.post.get(this)
+        },
         editPost(){
             // 
         },
         deletePost(){
             // 
+        },
+        userPost(user_id){
+            return user_id == this.$store.state.information.id ? true : false
+        },
+        timePosted(created_at){
+
         }
+    },
+    created(){
+        this.getPost();
     }
 }
 </script>

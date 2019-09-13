@@ -7,15 +7,20 @@ const store = new Vuex.Store({
     state:{
         loggedIn: !!localStorage.getItem('token'),
         information: {},
+        posts: []
       },
     
       getters:{
-        getInformation: state => state.information
+        getInformation: state => state.information,
+        getPosts: state => state.posts
       },
       
       actions:{
         async setInformation({commit}, payload) {
           commit('SET_INFORMATION', await payload)
+        },
+        async setPosts({commit}, payload) {
+          commit('SET_POSTS', await payload)
         }
       },
     
@@ -28,6 +33,9 @@ const store = new Vuex.Store({
         },
         SET_INFORMATION: (state, payload) => {
           state.information = payload
+        },
+        SET_POSTS: (state, payload) => {
+          state.posts = payload
         },
       },
 })

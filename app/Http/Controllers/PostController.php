@@ -6,15 +6,23 @@ use App\Post;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
-{
+{   
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        //
+    {   
+        $data = Post::whereDeletedAt(null)
+                ->join('users','posts.user_id','users.id')
+                ->select('posts.*', 'users.fullname', 'users.username')
+                ->orderBy('posts.created_at', 'DESC')
+                ->get();
+
+        return response()->json([
+            'data' => $data
+        ], 200);
     }
 
     /**
@@ -34,8 +42,17 @@ class PostController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        //
+    {   
+        $this->validate($request, [
+            'post' => 'required|max:120',
+            'user_id' => 'required'
+        ]);
+
+        Post::create($request->all());
+
+        return response()->json([
+            'message' => 'Successfully posted User!'
+        ], 201);
     }
 
     /**

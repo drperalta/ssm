@@ -27,7 +27,7 @@
             </a-col>
             <a-col span="24">
                 <!-- List of Posts -->
-                <PostListComponent></PostListComponent>
+                <PostListComponent :key="update"></PostListComponent>
             </a-col>
        </a-row>
     </div>
@@ -40,7 +40,8 @@ export default {
     components: { PostListComponent },
     data(){
         return{
-            postContent: ''
+            postContent: '',
+            update: 0
         }
     },
     computed:{
@@ -63,9 +64,9 @@ export default {
                 return
             }
 
-            console.log('HAHAHAH')
-        }
-    },
+            Vue.post.post(this, this.postContent)
+        },
+    }
 }
 </script>
 

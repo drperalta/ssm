@@ -23,6 +23,8 @@ import Auth from './helpers/auth'
 Vue.use(Auth)
 import User from './helpers/user'
 Vue.use(User)
+import Post from './helpers/post'
+Vue.use(Post)
 
 const app = new Vue({
     el: '#app',

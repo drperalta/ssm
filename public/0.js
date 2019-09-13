@@ -93,7 +93,8 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      postContent: ''
+      postContent: '',
+      update: 0
     };
   },
   computed: {
@@ -116,7 +117,7 @@ __webpack_require__.r(__webpack_exports__);
         return;
       }
 
-      console.log('HAHAHAH');
+      Vue.post.post(this, this.postContent);
     }
   }
 });
@@ -212,11 +213,26 @@ __webpack_require__.r(__webpack_exports__);
       }]
     };
   },
+  computed: {
+    posts: function posts() {
+      return this.$store.state.posts;
+    }
+  },
   methods: {
+    getPost: function getPost() {
+      Vue.post.get(this);
+    },
     editPost: function editPost() {// 
     },
     deletePost: function deletePost() {// 
-    }
+    },
+    userPost: function userPost(user_id) {
+      return user_id == this.$store.state.information.id ? true : false;
+    },
+    timePosted: function timePosted(created_at) {}
+  },
+  created: function created() {
+    this.getPost();
   }
 });
 
@@ -766,7 +782,12 @@ var render = function() {
             1
           ),
           _vm._v(" "),
-          _c("a-col", { attrs: { span: "24" } }, [_c("PostListComponent")], 1)
+          _c(
+            "a-col",
+            { attrs: { span: "24" } },
+            [_c("PostListComponent", { key: _vm.update })],
+            1
+          )
         ],
         1
       )
@@ -799,7 +820,7 @@ var render = function() {
   return _c(
     "div",
     { staticClass: "post-list-component" },
-    _vm._l(_vm.postList, function(post, index) {
+    _vm._l(_vm.posts, function(post, index) {
       return _c("a-card", { key: index, staticClass: "card" }, [
         _c(
           "span",
@@ -822,7 +843,7 @@ var render = function() {
               [
                 _c("a-col", { attrs: { xs: 22, sm: 23 } }, [
                   _c("span", { staticClass: "fullname" }, [
-                    _vm._v(_vm._s(post.name))
+                    _vm._v(_vm._s(post.fullname))
                   ]),
                   _vm._v(" "),
                   _c("span", { staticClass: "username" }, [
@@ -834,66 +855,87 @@ var render = function() {
                   "a-col",
                   { attrs: { xs: 2, sm: 1 } },
                   [
-                    _c(
-                      "a-dropdown",
-                      {
-                        staticClass: "post-options",
-                        attrs: { trigger: ["click"], placement: "bottomRight" }
-                      },
-                      [
-                        _c(
-                          "a",
+                    _vm.userPost(post.user_id)
+                      ? _c(
+                          "a-dropdown",
                           {
-                            staticClass: "ant-dropdown-link",
-                            attrs: { href: "#" }
+                            staticClass: "post-options",
+                            attrs: {
+                              trigger: ["click"],
+                              placement: "bottomRight"
+                            }
                           },
                           [
-                            _c("a-button", {
-                              attrs: {
-                                type: "link",
-                                shape: "circle",
-                                icon: "ellipsis",
-                                size: "small"
-                              }
-                            })
-                          ],
-                          1
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "a-menu",
-                          { attrs: { slot: "overlay" }, slot: "overlay" },
-                          [
-                            _c("a-menu-item", [
-                              _c("a", { on: { click: _vm.editPost } }, [
-                                _vm._v("Edit")
-                              ])
-                            ]),
+                            _c(
+                              "a",
+                              {
+                                staticClass: "ant-dropdown-link",
+                                attrs: { href: "#" }
+                              },
+                              [
+                                _c("a-button", {
+                                  attrs: {
+                                    type: "link",
+                                    shape: "circle",
+                                    icon: "ellipsis",
+                                    size: "small"
+                                  }
+                                })
+                              ],
+                              1
+                            ),
                             _vm._v(" "),
-                            _c("a-menu-item", [
-                              _c("a", { on: { click: _vm.deletePost } }, [
-                                _vm._v("Delete")
-                              ])
-                            ])
+                            _c(
+                              "a-menu",
+                              { attrs: { slot: "overlay" }, slot: "overlay" },
+                              [
+                                _c("a-menu-item", [
+                                  _c(
+                                    "a",
+                                    {
+                                      on: {
+                                        click: function($event) {
+                                          return _vm.editPost(post.id)
+                                        }
+                                      }
+                                    },
+                                    [_vm._v("Edit")]
+                                  )
+                                ]),
+                                _vm._v(" "),
+                                _c("a-menu-item", [
+                                  _c(
+                                    "a",
+                                    {
+                                      on: {
+                                        click: function($event) {
+                                          return _vm.deletePost(post.id)
+                                        }
+                                      }
+                                    },
+                                    [_vm._v("Delete")]
+                                  )
+                                ])
+                              ],
+                              1
+                            )
                           ],
                           1
                         )
-                      ],
-                      1
-                    )
+                      : _vm._e()
                   ],
                   1
                 ),
                 _vm._v(" "),
                 _c("a-col", { attrs: { span: "24" } }, [
                   _c("span", { staticClass: "post-time" }, [
-                    _vm._v(_vm._s(post.postTime) + " ago")
+                    _vm._v(_vm._s(_vm.timePosted(post.created_at)) + " ago")
                   ])
                 ]),
                 _vm._v(" "),
                 _c("a-col", { attrs: { span: "24" } }, [
                   _c("p", { staticClass: "post-content" }, [
-                    _vm._v(_vm._s(post.postContent))
+                    _vm._v(_vm._s(post.post))
                   ])
                 ])
               ],

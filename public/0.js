@@ -109,6 +109,9 @@ __webpack_require__.r(__webpack_exports__);
       } else {
         return 'active';
       }
+    },
+    posts: function posts() {
+      return this.$store.state.posts;
     }
   },
   methods: {
@@ -133,6 +136,10 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var timers__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! timers */ "./node_modules/timers-browserify/main.js");
+/* harmony import */ var timers__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(timers__WEBPACK_IMPORTED_MODULE_1__);
 //
 //
 //
@@ -177,40 +184,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      postList: [{
-        id: 1,
-        name: 'David Peralta',
-        username: 'peraltadavidr',
-        postContent: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard',
-        postTime: '1sec'
-      }, {
-        id: 2,
-        name: 'David Peralta',
-        username: 'peraltadavidr',
-        postContent: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard',
-        postTime: '4sec'
-      }, {
-        id: 3,
-        name: 'David Peralta',
-        username: 'peraltadavidr',
-        postContent: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard',
-        postTime: '23sec'
-      }, {
-        id: 4,
-        name: 'David Peralta',
-        username: 'peraltadavidr',
-        postContent: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard',
-        postTime: '44sec'
-      }, {
-        id: 5,
-        name: 'David Peralta',
-        username: 'peraltadavidr',
-        postContent: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard',
-        postTime: '56sec'
-      }]
+      updatingPosts: true
     };
   },
   computed: {
@@ -222,17 +201,39 @@ __webpack_require__.r(__webpack_exports__);
     getPost: function getPost() {
       Vue.post.get(this);
     },
-    editPost: function editPost() {// 
+    updatePost: function updatePost() {
+      var _this = this;
+
+      this.updatingPosts = true;
+      Object(timers__WEBPACK_IMPORTED_MODULE_1__["setTimeout"])(function () {
+        Vue.post.update(_this);
+      }, 500);
     },
-    deletePost: function deletePost() {// 
+    deletePost: function deletePost(post_id) {
+      console.log(post_id);
     },
     userPost: function userPost(user_id) {
       return user_id == this.$store.state.information.id ? true : false;
     },
-    timePosted: function timePosted(created_at) {}
+    timePosted: function timePosted(created_at) {
+      return moment__WEBPACK_IMPORTED_MODULE_0___default()(created_at).fromNow();
+    },
+    handleScroll: function handleScroll(event) {
+      var _this2 = this;
+
+      window.onscroll = function () {
+        if (window.innerHeight + window.scrollY >= document.body.scrollHeight) {
+          _this2.updatePost();
+        }
+      };
+    }
   },
   created: function created() {
     this.getPost();
+    window.addEventListener('scroll', this.handleScroll);
+  },
+  destroyed: function destroyed() {
+    window.removeEventListener('scroll', this.handleScroll);
   }
 });
 
@@ -285,7 +286,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_Main_NavbarComponent__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../components/Main/NavbarComponent */ "./resources/js/components/Main/NavbarComponent.vue");
 /* harmony import */ var _components_Main_UserCardComponent__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/Main/UserCardComponent */ "./resources/js/components/Main/UserCardComponent.vue");
 /* harmony import */ var _components_Main_PostComponent__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/Main/PostComponent */ "./resources/js/components/Main/PostComponent.vue");
-//
 //
 //
 //
@@ -390,7 +390,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, ".post-list-component .ant-card-body {\n  padding: 15px !important;\n}\n.post-list-component .card {\n  margin: 8px 0px;\n}\n.post-list-component .fullname {\n  font-weight: 600;\n}\n.post-list-component .username {\n  color: #919191;\n}\n.post-list-component .post-time {\n  color: #919191;\n  font-size: 12px;\n}\n.post-list-component .post-content {\n  margin-top: 8px;\n  font-size: 15px;\n  font-weight: 400;\n}\n.post-list-component .post-options {\n  float: right;\n  position: absolute;\n}\n.post-list-component .row {\n  margin-left: 48px;\n}\n.post-list-component .ant-col-18 {\n  line-height: 1;\n}\n", ""]);
+exports.push([module.i, ".post-list-component .ant-card-body {\n  padding: 15px !important;\n}\n.post-list-component .card {\n  margin: 8px 0px;\n}\n.post-list-component .fullname {\n  font-weight: 600;\n}\n.post-list-component .username {\n  color: #919191;\n}\n.post-list-component .post-time {\n  color: #919191;\n  font-size: 12px;\n}\n.post-list-component .post-content {\n  margin-top: 8px;\n  font-size: 15px;\n  font-weight: 400;\n}\n.post-list-component .post-options {\n  float: right;\n  position: absolute;\n}\n.post-list-component .row {\n  margin-left: 48px;\n}\n.post-list-component .ant-col-18 {\n  line-height: 1;\n}\n.spin {\n  text-align: center;\n  border-radius: 4px;\n  margin-bottom: 20px;\n  padding: 30px 50px;\n}\n", ""]);
 
 // exports
 
@@ -428,7 +428,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".main-page {\n  width: 100vw;\n  height: 100vh;\n}\n.main-page .ant-layout-header {\n  height: 50px;\n  padding: 5px 10px;\n  line-height: 0;\n}\n.main-page .ant-layout-header .header {\n  max-width: 800px;\n  margin: 0 auto;\n}\n.main-page .ant-layout-content {\n  padding-top: 16px;\n}\n.main-page .ant-layout-content .content {\n  max-width: 800px;\n  margin: 0 auto;\n}\n.main-page .spin-content {\n  border: 1px solid #91d5ff;\n  background-color: #e6f7ff;\n  padding: 30px;\n}\n", ""]);
+exports.push([module.i, ".main-page .ant-layout-header {\n  height: 50px;\n  padding: 5px 10px;\n  line-height: 0;\n}\n.main-page .ant-layout-header .header {\n  max-width: 800px;\n  margin: 0 auto;\n}\n.main-page .ant-layout-content {\n  padding-top: 16px;\n}\n.main-page .ant-layout-content .content {\n  max-width: 800px;\n  margin: 0 auto;\n}\n.main-page .spin-content {\n  border: 1px solid #91d5ff;\n  background-color: #e6f7ff;\n  position: absolute;\n}\n", ""]);
 
 // exports
 
@@ -785,7 +785,11 @@ var render = function() {
           _c(
             "a-col",
             { attrs: { span: "24" } },
-            [_c("PostListComponent", { key: _vm.update })],
+            [
+              _vm.posts
+                ? _c("PostListComponent", { key: _vm.update })
+                : _vm._e()
+            ],
             1
           )
         ],
@@ -820,133 +824,125 @@ var render = function() {
   return _c(
     "div",
     { staticClass: "post-list-component" },
-    _vm._l(_vm.posts, function(post, index) {
-      return _c("a-card", { key: index, staticClass: "card" }, [
-        _c(
-          "span",
-          { staticClass: "mr1", staticStyle: { float: "left" } },
-          [
-            _c("a-avatar", {
-              staticClass: "avatar",
-              attrs: { size: 40, icon: "user" }
-            })
-          ],
-          1
-        ),
-        _vm._v(" "),
-        _c(
-          "span",
-          [
-            _c(
-              "a-row",
-              { staticClass: "row" },
-              [
-                _c("a-col", { attrs: { xs: 22, sm: 23 } }, [
-                  _c("span", { staticClass: "fullname" }, [
-                    _vm._v(_vm._s(post.fullname))
+    [
+      _vm._l(_vm.posts, function(post, index) {
+        return _c("a-card", { key: index, staticClass: "card" }, [
+          _c(
+            "span",
+            { staticClass: "mr1", staticStyle: { float: "left" } },
+            [
+              _c("a-avatar", {
+                staticClass: "avatar",
+                attrs: { size: 40, icon: "user" }
+              })
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "span",
+            [
+              _c(
+                "a-row",
+                { staticClass: "row" },
+                [
+                  _c("a-col", { attrs: { xs: 22, sm: 23 } }, [
+                    _c("span", { staticClass: "fullname" }, [
+                      _vm._v(_vm._s(post.fullname))
+                    ]),
+                    _vm._v(" "),
+                    _c("span", { staticClass: "username" }, [
+                      _vm._v("@" + _vm._s(post.username))
+                    ])
                   ]),
                   _vm._v(" "),
-                  _c("span", { staticClass: "username" }, [
-                    _vm._v("@" + _vm._s(post.username))
-                  ])
-                ]),
-                _vm._v(" "),
-                _c(
-                  "a-col",
-                  { attrs: { xs: 2, sm: 1 } },
-                  [
-                    _vm.userPost(post.user_id)
-                      ? _c(
-                          "a-dropdown",
-                          {
-                            staticClass: "post-options",
-                            attrs: {
-                              trigger: ["click"],
-                              placement: "bottomRight"
-                            }
-                          },
-                          [
-                            _c(
-                              "a",
-                              {
-                                staticClass: "ant-dropdown-link",
-                                attrs: { href: "#" }
-                              },
-                              [
-                                _c("a-button", {
-                                  attrs: {
-                                    type: "link",
-                                    shape: "circle",
-                                    icon: "ellipsis",
-                                    size: "small"
-                                  }
-                                })
-                              ],
-                              1
-                            ),
-                            _vm._v(" "),
-                            _c(
-                              "a-menu",
-                              { attrs: { slot: "overlay" }, slot: "overlay" },
-                              [
-                                _c("a-menu-item", [
-                                  _c(
-                                    "a",
-                                    {
-                                      on: {
-                                        click: function($event) {
-                                          return _vm.editPost(post.id)
+                  _c(
+                    "a-col",
+                    { attrs: { xs: 2, sm: 1 } },
+                    [
+                      _vm.userPost(post.user_id)
+                        ? _c(
+                            "a-dropdown",
+                            {
+                              staticClass: "post-options",
+                              attrs: {
+                                trigger: ["click"],
+                                placement: "bottomRight"
+                              }
+                            },
+                            [
+                              _c(
+                                "a",
+                                {
+                                  staticClass: "ant-dropdown-link",
+                                  attrs: { href: "#" }
+                                },
+                                [
+                                  _c("a-button", {
+                                    attrs: {
+                                      type: "link",
+                                      shape: "circle",
+                                      icon: "ellipsis",
+                                      size: "small"
+                                    }
+                                  })
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "a-menu",
+                                { attrs: { slot: "overlay" }, slot: "overlay" },
+                                [
+                                  _c("a-menu-item", [
+                                    _c(
+                                      "a",
+                                      {
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.deletePost(post.id)
+                                          }
                                         }
-                                      }
-                                    },
-                                    [_vm._v("Edit")]
-                                  )
-                                ]),
-                                _vm._v(" "),
-                                _c("a-menu-item", [
-                                  _c(
-                                    "a",
-                                    {
-                                      on: {
-                                        click: function($event) {
-                                          return _vm.deletePost(post.id)
-                                        }
-                                      }
-                                    },
-                                    [_vm._v("Delete")]
-                                  )
-                                ])
-                              ],
-                              1
-                            )
-                          ],
-                          1
-                        )
-                      : _vm._e()
-                  ],
-                  1
-                ),
-                _vm._v(" "),
-                _c("a-col", { attrs: { span: "24" } }, [
-                  _c("span", { staticClass: "post-time" }, [
-                    _vm._v(_vm._s(_vm.timePosted(post.created_at)) + " ago")
+                                      },
+                                      [_vm._v("Delete")]
+                                    )
+                                  ])
+                                ],
+                                1
+                              )
+                            ],
+                            1
+                          )
+                        : _vm._e()
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c("a-col", { attrs: { span: "24" } }, [
+                    _c("span", { staticClass: "post-time" }, [
+                      _vm._v(_vm._s(_vm.timePosted(post.created_at)))
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("a-col", { attrs: { span: "24" } }, [
+                    _c("p", { staticClass: "post-content" }, [
+                      _vm._v(_vm._s(post.post))
+                    ])
                   ])
-                ]),
-                _vm._v(" "),
-                _c("a-col", { attrs: { span: "24" } }, [
-                  _c("p", { staticClass: "post-content" }, [
-                    _vm._v(_vm._s(post.post))
-                  ])
-                ])
-              ],
-              1
-            )
-          ],
-          1
-        )
-      ])
-    }),
-    1
+                ],
+                1
+              )
+            ],
+            1
+          )
+        ])
+      }),
+      _vm._v(" "),
+      _vm.updatingPosts
+        ? _c("div", { staticClass: "spin" }, [_c("a-spin")], 1)
+        : _vm._e()
+    ],
+    2
   )
 }
 var staticRenderFns = []

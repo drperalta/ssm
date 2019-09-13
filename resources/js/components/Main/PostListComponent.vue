@@ -20,9 +20,6 @@
                             </a>
                             <a-menu slot="overlay">
                                 <a-menu-item>
-                                    <a @click="editPost(post.id)">Edit</a>
-                                </a-menu-item>
-                                <a-menu-item>
                                     <a @click="deletePost(post.id)">Delete</a>
                                 </a-menu-item>
                             </a-menu>
@@ -39,52 +36,21 @@
                 </a-row>
             </span>
         </a-card>
+        <div class="spin" v-if="updatingPosts">
+            <a-spin />
+        </div>
     </div>
 </template>
 
 <script>
 import moment from 'moment'
+import { setTimeout } from 'timers';
 
 export default {
+    
     data(){
         return{
-            postList: [
-                {   
-                    id: 1,
-                    name: 'David Peralta',
-                    username: 'peraltadavidr',
-                    postContent: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard',
-                    postTime: '1sec'
-                },
-                {   
-                    id: 2,
-                    name: 'David Peralta',
-                    username: 'peraltadavidr',
-                    postContent: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard',
-                    postTime: '4sec'
-                },
-                {   
-                    id: 3,
-                    name: 'David Peralta',
-                    username: 'peraltadavidr',
-                    postContent: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard',
-                    postTime: '23sec'
-                },
-                {   
-                    id: 4,
-                    name: 'David Peralta',
-                    username: 'peraltadavidr',
-                    postContent: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard',
-                    postTime: '44sec'
-                },
-                {   
-                    id: 5,
-                    name: 'David Peralta',
-                    username: 'peraltadavidr',
-                    postContent: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard',
-                    postTime: '56sec'
-                }
-            ]
+            updatingPosts: true,
         }
     },
     computed:{
@@ -96,21 +62,36 @@ export default {
         getPost(){
             Vue.post.get(this)
         },
-        editPost(){
-            // 
+        updatePost(){
+            this.updatingPosts = true
+            
+            setTimeout(() =>{
+                Vue.post.update(this)
+            }, 500)
         },
-        deletePost(){
-            // 
+        deletePost(post_id){
+            console.log(post_id)
         },
         userPost(user_id){
             return user_id == this.$store.state.information.id ? true : false
         },
         timePosted(created_at){
-            return moment(created_at).fromNow().
+            return moment(created_at).fromNow()
+        },
+        handleScroll (event) {
+            window.onscroll = () => {
+                if ((window.innerHeight + window.scrollY) >= document.body.scrollHeight) {
+                    this.updatePost()
+                }
+            };
         }
     },
     created(){
         this.getPost();
+        window.addEventListener('scroll', this.handleScroll);
+    },
+    destroyed () {
+        window.removeEventListener('scroll', this.handleScroll);
     }
 }
 </script>
@@ -151,6 +132,13 @@ export default {
     .ant-col-18{
         line-height: 1;
     }
+}
+
+.spin {
+    text-align: center;
+    border-radius: 4px;
+    margin-bottom: 20px;
+    padding: 30px 50px;
 }
 
 

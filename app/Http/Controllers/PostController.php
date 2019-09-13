@@ -18,7 +18,7 @@ class PostController extends Controller
                 ->join('users','posts.user_id','users.id')
                 ->select('posts.*', 'users.fullname', 'users.username')
                 ->orderBy('posts.created_at', 'DESC')
-                ->get();
+                ->paginate(8);
 
         return response()->json([
             'data' => $data

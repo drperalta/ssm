@@ -20,9 +20,26 @@ export default function(Vue){
             }
         },
 
+        async update(context){
+            const result = await axios.get(`/api/post?page=${context.$store.state.postPage}`)
+            context.$store.dispatch('updatePosts', result.data.data.data)
+
+            context.updatingPosts = false
+        },
+
         async get(context){
-            const result = await axios.get('/api/post')
-            context.$store.dispatch('setPosts', result.data.data)
+
+            let posts = []
+
+            for(let i = 1; i <= context.$store.state.postPage; i++){
+                const result = await axios.get(`/api/post?page=${i}`)
+                result.data.data.data.forEach(post =>{
+                    posts.push(post)
+                })
+                
+            }
+            context.$store.dispatch('setPosts', posts)
+            context.updatingPosts = false
         }
     }
 }

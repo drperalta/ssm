@@ -25,7 +25,6 @@
                         </a-row>
                     </div>
                 </a-layout-content>
-                
             </a-layout>
         </div>
     </a-spin>
@@ -53,10 +52,7 @@ export default {
 </script>
 
 <style lang="less">
-.main-page{
-    width: 100vw;
-    height: 100vh;
-    
+.main-page{    
     .ant-layout-header{
         height: 50px;
         padding: 5px 10px;
@@ -77,7 +73,7 @@ export default {
     .spin-content{
         border: 1px solid #91d5ff;
         background-color: #e6f7ff;
-        padding: 30px;
+        position: absolute;
     }
 }
 </style>

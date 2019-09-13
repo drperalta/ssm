@@ -27,7 +27,7 @@
             </a-col>
             <a-col span="24">
                 <!-- List of Posts -->
-                <PostListComponent :key="update"></PostListComponent>
+                <PostListComponent :key="update" v-if="posts"></PostListComponent>
             </a-col>
        </a-row>
     </div>
@@ -56,6 +56,9 @@ export default {
             }else{
                 return 'active'
             }
+        },
+        posts(){
+            return this.$store.state.posts
         }
     },
     methods: {

@@ -1,5 +1,5 @@
 <template>
-    <a-spin :spinning="loading">
+    <a-spin :spinning="loading" size="medium">
         <a-icon slot="indicator" type="loading" style="font-size: 32px" spin />
         <div class="main-page">
             <a-layout style="background: transparent;" v-if="!loading">
@@ -53,6 +53,7 @@ export default {
 
 <style lang="less">
 .main-page{    
+    height: 100vh;
     .ant-layout-header{
         height: 50px;
         padding: 5px 10px;
@@ -70,10 +71,8 @@ export default {
             margin: 0 auto;
         }
     }
-    .spin-content{
-        border: 1px solid #91d5ff;
-        background-color: #e6f7ff;
-        position: absolute;
-    }
+}
+.ant-spin-spinning{
+    top: 10% !important;
 }
 </style>

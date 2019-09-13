@@ -435,7 +435,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".main-page .ant-layout-header {\n  height: 50px;\n  padding: 5px 10px;\n  line-height: 0;\n}\n.main-page .ant-layout-header .header {\n  max-width: 800px;\n  margin: 0 auto;\n}\n.main-page .ant-layout-content {\n  padding-top: 16px;\n}\n.main-page .ant-layout-content .content {\n  max-width: 800px;\n  margin: 0 auto;\n}\n.main-page .spin-content {\n  border: 1px solid #91d5ff;\n  background-color: #e6f7ff;\n  position: absolute;\n}\n", ""]);
+exports.push([module.i, ".main-page {\n  height: 100vh;\n}\n.main-page .ant-layout-header {\n  height: 50px;\n  padding: 5px 10px;\n  line-height: 0;\n}\n.main-page .ant-layout-header .header {\n  max-width: 800px;\n  margin: 0 auto;\n}\n.main-page .ant-layout-content {\n  padding-top: 16px;\n}\n.main-page .ant-layout-content .content {\n  max-width: 800px;\n  margin: 0 auto;\n}\n.ant-spin-spinning {\n  top: 10% !important;\n}\n", ""]);
 
 // exports
 
@@ -1034,7 +1034,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "a-spin",
-    { attrs: { spinning: _vm.loading } },
+    { attrs: { spinning: _vm.loading, size: "medium" } },
     [
       _c("a-icon", {
         staticStyle: { "font-size": "32px" },

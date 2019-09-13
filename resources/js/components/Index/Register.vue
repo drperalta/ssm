@@ -9,7 +9,7 @@
         
         <a-form @submit.prevent="register" :form="form">
             <a-form-item hasFeedback>
-                <a-input placeholder="Full Name" id="fullname" v-decorator="['fullname', validationRules.fullname]"></a-input>
+                <a-input placeholder="Full Name" v-decorator="['fullname', validationRules.fullname]"></a-input>
             </a-form-item>
             <a-form-item hasFeedback>
                 <a-input placeholder="Email" v-decorator="['email', validationRules.email]"></a-input>

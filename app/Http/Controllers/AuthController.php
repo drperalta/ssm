@@ -31,11 +31,13 @@ class AuthController extends Controller
     }
 
     public function login(Request $request){
+
         $this->validate($request, [
             'username' => 'required|max:255',
             'password' => 'required|max:255'
         ]);
 
+        return $request->all();
 
     }
 }

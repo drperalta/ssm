@@ -16,9 +16,15 @@ export default function(Vue){
             
         },
         async login(context, payload){
-            const result = await axios.post('/api/auth/login', payload);
+            try{
+                const result = await axios.post('/api/auth/login', payload);
 
-            console.log(result.data)
+                console.log(result.data)
+            }
+            catch(err){
+                let error = Object.values(err.response.data.errors);
+                context.alert.error = error[0][0];
+            }
         }
     }
 }

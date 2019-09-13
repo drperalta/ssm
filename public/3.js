@@ -232,7 +232,7 @@ var render = function() {
                     expression: "['fullname', validationRules.fullname]"
                   }
                 ],
-                attrs: { placeholder: "Full Name", id: "fullname" }
+                attrs: { placeholder: "Full Name" }
               })
             ],
             1

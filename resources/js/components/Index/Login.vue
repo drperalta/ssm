@@ -2,12 +2,16 @@
     <div class="login-component">
         <div class="mb2">SIGN IN</div>
         
-        <a-form @submit.prevent="login">
-            <a-form-item>
-                <a-input placeholder="Username" v-model="loginForm.username"/>
+        <div class="mb1">
+            <a-alert :message="alert.error" type="error" v-if="alert.error"/>
+        </div>
+
+        <a-form @submit.prevent="login" :form="form">
+            <a-form-item hasFeedback>
+                <a-input placeholder="Username" v-decorator="['username', validationRules.username]"/>
             </a-form-item>
-            <a-form-item>
-                <a-input placeholder="Password" type="password" v-model="loginForm.password"/>
+            <a-form-item hasFeedback>
+                <a-input placeholder="Password" type="password" v-decorator="['password', validationRules.password]"/>
             </a-form-item>
 
             <a-button class="mt3 mb1" type="primary" html-type="submit" block>Login</a-button>
@@ -20,16 +24,34 @@
 export default {
     data(){
         return{
-            loginForm: {
-                username: '',
-                password: ''
+            alert:{
+                error: ''   
+            },
+            validationRules: {
+                username: {
+                    rules: [{required: true, message: 'Username is required'}]
+                },
+                password: {
+                    rules: [{required: true, message: 'Password is required'},{min: 6, message: 'Password must be at least 6 characters'}]
+                }
             }
         }
     },
     methods: {
         login(){
-            Vue.auth.login(this, this.loginForm)
+            this.clearAlert();
+            this.form.validateFields((err,data) => {
+                if (!err) {
+                    Vue.auth.login(this, data)
+                }
+            });
+        },
+        clearAlert(){
+            this.alert.error = ''
         }
+    },
+    beforeCreate(){
+        this.form = this.$form.createForm(this);
     }
 }
 </script>
@@ -37,5 +59,8 @@ export default {
 <style lang="less">
 .ant-form-item{
     margin-bottom: 0px !important;
+    .ant-form-explain{
+        text-align: left;
+    }
 }
 </style>

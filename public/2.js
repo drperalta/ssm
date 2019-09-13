@@ -27,19 +27,52 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      loginForm: {
-        username: '',
-        password: ''
+      alert: {
+        error: ''
+      },
+      validationRules: {
+        username: {
+          rules: [{
+            required: true,
+            message: 'Username is required'
+          }]
+        },
+        password: {
+          rules: [{
+            required: true,
+            message: 'Password is required'
+          }, {
+            min: 6,
+            message: 'Password must be at least 6 characters'
+          }]
+        }
       }
     };
   },
   methods: {
     login: function login() {
-      Vue.auth.login(this, this.loginForm);
+      var _this = this;
+
+      this.clearAlert();
+      this.form.validateFields(function (err, data) {
+        if (!err) {
+          Vue.auth.login(_this, data);
+        }
+      });
+    },
+    clearAlert: function clearAlert() {
+      this.alert.error = '';
     }
+  },
+  beforeCreate: function beforeCreate() {
+    this.form = this.$form.createForm(this);
   }
 });
 
@@ -57,7 +90,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, ".ant-form-item {\n  margin-bottom: 0px !important;\n}\n", ""]);
+exports.push([module.i, ".ant-form-item {\n  margin-bottom: 0px !important;\n}\n.ant-form-item .ant-form-explain {\n  text-align: left;\n}\n", ""]);
 
 // exports
 
@@ -116,8 +149,22 @@ var render = function() {
       _c("div", { staticClass: "mb2" }, [_vm._v("SIGN IN")]),
       _vm._v(" "),
       _c(
+        "div",
+        { staticClass: "mb1" },
+        [
+          _vm.alert.error
+            ? _c("a-alert", {
+                attrs: { message: _vm.alert.error, type: "error" }
+              })
+            : _vm._e()
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
         "a-form",
         {
+          attrs: { form: _vm.form },
           on: {
             submit: function($event) {
               $event.preventDefault()
@@ -128,16 +175,18 @@ var render = function() {
         [
           _c(
             "a-form-item",
+            { attrs: { hasFeedback: "" } },
             [
               _c("a-input", {
-                attrs: { placeholder: "Username" },
-                model: {
-                  value: _vm.loginForm.username,
-                  callback: function($$v) {
-                    _vm.$set(_vm.loginForm, "username", $$v)
-                  },
-                  expression: "loginForm.username"
-                }
+                directives: [
+                  {
+                    name: "decorator",
+                    rawName: "v-decorator",
+                    value: ["username", _vm.validationRules.username],
+                    expression: "['username', validationRules.username]"
+                  }
+                ],
+                attrs: { placeholder: "Username" }
               })
             ],
             1
@@ -145,16 +194,18 @@ var render = function() {
           _vm._v(" "),
           _c(
             "a-form-item",
+            { attrs: { hasFeedback: "" } },
             [
               _c("a-input", {
-                attrs: { placeholder: "Password", type: "password" },
-                model: {
-                  value: _vm.loginForm.password,
-                  callback: function($$v) {
-                    _vm.$set(_vm.loginForm, "password", $$v)
-                  },
-                  expression: "loginForm.password"
-                }
+                directives: [
+                  {
+                    name: "decorator",
+                    rawName: "v-decorator",
+                    value: ["password", _vm.validationRules.password],
+                    expression: "['password', validationRules.password]"
+                  }
+                ],
+                attrs: { placeholder: "Password", type: "password" }
               })
             ],
             1

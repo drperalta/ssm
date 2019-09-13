@@ -1,5 +1,5 @@
 <template>
-    <a-spin :spinning="loading" size="medium">
+    <a-spin :spinning="loading">
         <a-icon slot="indicator" type="loading" style="font-size: 32px" spin />
         <div class="main-page">
             <a-layout style="background: transparent;" v-if="!loading">

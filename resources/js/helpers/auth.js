@@ -6,10 +6,12 @@ export default function(Vue){
 
                 context.alert.success = result.data.message;
                 context.form = context.$form.createForm(context);
+                context.disabled = false
             }
             catch(err){
                 let error = Object.values(err.response.data.errors);
                 context.alert.error = error[0][0];
+                context.disabled = false
             }
             
         },
@@ -24,10 +26,12 @@ export default function(Vue){
                 context.$store.commit('LOGIN')
 
                 context.$router.go({ name: 'Main' })
+                context.disabled = false
             }
             catch(err){
                 context.alert.error = err.response.data.error;
                 console.log(err)
+                context.disabled = false
             }
         },
         async logout(context){

@@ -53,17 +53,21 @@ __webpack_require__.r(__webpack_exports__);
             message: 'Password must be at least 6 characters'
           }]
         }
-      }
+      },
+      disabled: false
     };
   },
   methods: {
     login: function login() {
       var _this = this;
 
+      this.disabled = true;
       this.clearAlert();
       this.form.validateFields(function (err, data) {
         if (!err) {
           Vue.auth.login(_this, data);
+        } else {
+          _this.disabled = false;
         }
       });
     },
@@ -186,7 +190,7 @@ var render = function() {
                     expression: "['username', validationRules.username]"
                   }
                 ],
-                attrs: { placeholder: "Username" }
+                attrs: { placeholder: "Username", disabled: _vm.disabled }
               })
             ],
             1
@@ -205,7 +209,11 @@ var render = function() {
                     expression: "['password', validationRules.password]"
                   }
                 ],
-                attrs: { placeholder: "Password", type: "password" }
+                attrs: {
+                  placeholder: "Password",
+                  type: "password",
+                  disabled: _vm.disabled
+                }
               })
             ],
             1
@@ -215,14 +223,21 @@ var render = function() {
             "a-button",
             {
               staticClass: "mt3 mb1",
-              attrs: { type: "primary", "html-type": "submit", block: "" }
+              attrs: {
+                type: "primary",
+                "html-type": "submit",
+                block: "",
+                disabled: _vm.disabled
+              }
             },
             [_vm._v("Login")]
           ),
           _vm._v(" "),
-          _c("router-link", { attrs: { to: { name: "Register" } } }, [
-            _vm._v("Need and account? Sign up")
-          ])
+          _c(
+            "router-link",
+            { attrs: { to: { name: "Register" }, disabled: _vm.disabled } },
+            [_vm._v("Need and account? Sign up")]
+          )
         ],
         1
       )

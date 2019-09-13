@@ -1,4 +1,6 @@
-# Run this commands
+# Simplified Social Media
+
+*Run this commands*
 
 npm install
 

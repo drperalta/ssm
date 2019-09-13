@@ -1,5 +1,9 @@
 <template>
     <div class="post-list-component">
+        <div class="no-post" v-if="posts.length == 0">
+            <img class="logo" src="../../../assets/img/ssm-logo-shadow.png" alt="">
+            <p>No post available to show</p>
+        </div>
         <a-card class="card" v-for="(post, index) in posts" :key="index">
             <!-- User Avatar -->
             <span class="mr1" style="float: left">
@@ -132,6 +136,19 @@ export default {
     }
     .ant-col-18{
         line-height: 1;
+    }
+    .no-post{
+        padding-top: 20px;
+        text-align: center;
+        margin: 0 auto;
+        .logo{
+            width: 80px;
+            opacity: 0.4;
+        }
+        p{
+            color: rgb(173, 173, 173);
+            font-size: 14px;
+        }
     }
 }
 

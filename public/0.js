@@ -184,6 +184,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -393,7 +397,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, ".post-list-component .ant-card-body {\n  padding: 15px !important;\n}\n.post-list-component .card {\n  margin: 8px 0px;\n}\n.post-list-component .fullname {\n  font-weight: 600;\n}\n.post-list-component .username {\n  color: #919191;\n}\n.post-list-component .post-time {\n  color: #919191;\n  font-size: 12px;\n}\n.post-list-component .post-content {\n  margin-top: 8px;\n  font-size: 15px;\n  font-weight: 400;\n}\n.post-list-component .post-options {\n  float: right;\n  position: absolute;\n}\n.post-list-component .row {\n  margin-left: 48px;\n}\n.post-list-component .ant-col-18 {\n  line-height: 1;\n}\n.spin {\n  text-align: center;\n  border-radius: 4px;\n  margin-bottom: 20px;\n  padding: 30px 50px;\n}\n", ""]);
+exports.push([module.i, ".post-list-component .ant-card-body {\n  padding: 15px !important;\n}\n.post-list-component .card {\n  margin: 8px 0px;\n}\n.post-list-component .fullname {\n  font-weight: 600;\n}\n.post-list-component .username {\n  color: #919191;\n}\n.post-list-component .post-time {\n  color: #919191;\n  font-size: 12px;\n}\n.post-list-component .post-content {\n  margin-top: 8px;\n  font-size: 15px;\n  font-weight: 400;\n}\n.post-list-component .post-options {\n  float: right;\n  position: absolute;\n}\n.post-list-component .row {\n  margin-left: 48px;\n}\n.post-list-component .ant-col-18 {\n  line-height: 1;\n}\n.post-list-component .no-post {\n  padding-top: 20px;\n  text-align: center;\n  margin: 0 auto;\n}\n.post-list-component .no-post .logo {\n  width: 80px;\n  opacity: 0.4;\n}\n.post-list-component .no-post p {\n  color: #adadad;\n  font-size: 14px;\n}\n.spin {\n  text-align: center;\n  border-radius: 4px;\n  margin-bottom: 20px;\n  padding: 30px 50px;\n}\n", ""]);
 
 // exports
 
@@ -828,6 +832,20 @@ var render = function() {
     "div",
     { staticClass: "post-list-component" },
     [
+      _vm.posts.length == 0
+        ? _c("div", { staticClass: "no-post" }, [
+            _c("img", {
+              staticClass: "logo",
+              attrs: {
+                src: __webpack_require__(/*! ../../../assets/img/ssm-logo-shadow.png */ "./resources/assets/img/ssm-logo-shadow.png"),
+                alt: ""
+              }
+            }),
+            _vm._v(" "),
+            _c("p", [_vm._v("No post available to show")])
+          ])
+        : _vm._e(),
+      _vm._v(" "),
       _vm._l(_vm.posts, function(post, index) {
         return _c("a-card", { key: index, staticClass: "card" }, [
           _c(
@@ -1090,6 +1108,17 @@ var staticRenderFns = []
 render._withStripped = true
 
 
+
+/***/ }),
+
+/***/ "./resources/assets/img/ssm-logo-shadow.png":
+/*!**************************************************!*\
+  !*** ./resources/assets/img/ssm-logo-shadow.png ***!
+  \**************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "/images/ssm-logo-shadow.png?017f84d66cf719ee87e6c1706b1d9121";
 
 /***/ }),
 

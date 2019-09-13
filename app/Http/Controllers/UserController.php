@@ -11,7 +11,7 @@ class UserController extends Controller
     {   
         $id =  auth()->user()->id;
         
-        $user = User::whereId($id)->get(['fullname','username','email']);
+        $user = User::whereId($id)->get(['fullname','username','email','id']);
 
         return response()->json($user[0], 200);
     }

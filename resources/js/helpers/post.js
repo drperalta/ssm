@@ -16,9 +16,11 @@ export default function(Vue){
                 context.update += 1;
 
                 context.$message.success(result.data.message);
+                context.disabled = false
             }
             catch(err){
                 console.log(err)
+                context.disabled = false
             }
         },
         async get(context){

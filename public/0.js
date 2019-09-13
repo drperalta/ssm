@@ -94,7 +94,8 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       postContent: '',
-      update: 0
+      update: 0,
+      disabled: false
     };
   },
   computed: {
@@ -116,7 +117,10 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     post: function post() {
+      this.disabled = true;
+
       if (this.postContent.length > 120 || this.postContent.length <= 0) {
+        this.disabled = false;
         return;
       }
 
@@ -706,7 +710,8 @@ var render = function() {
                                 attrs: {
                                   autosize: "",
                                   placeholder: "What's happening?",
-                                  rows: 2
+                                  rows: 2,
+                                  disabled: _vm.disabled
                                 },
                                 model: {
                                   value: _vm.postContent,
@@ -767,7 +772,8 @@ var render = function() {
                                 type: "primary",
                                 disabled:
                                   _vm.postContent.length > 120 ||
-                                  _vm.postContent.length <= 0,
+                                  _vm.postContent.length <= 0 ||
+                                  _vm.disabled,
                                 block: ""
                               },
                               on: { click: _vm.post }
@@ -1034,7 +1040,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "a-spin",
-    { attrs: { spinning: _vm.loading, size: "medium" } },
+    { attrs: { spinning: _vm.loading } },
     [
       _c("a-icon", {
         staticStyle: { "font-size": "32px" },

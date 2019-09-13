@@ -7,7 +7,7 @@
                         <!-- Post TextArea and Counter -->
                         <a-col :xs="22" :md="18">
                             <a-form-item :validateStatus="postCountentProgressStatus === 'exception'? 'error' : ''">
-                                <a-textarea autosize placeholder="What's happening?" :rows="2" v-model="postContent"/>
+                                <a-textarea autosize placeholder="What's happening?" :rows="2" v-model="postContent" :disabled="disabled"/>
                             </a-form-item>
                             <div style="float: right; margin-right: 5px; font-size: 12px; color: grey">{{ postContent.length }}/120</div>
                         </a-col>
@@ -19,7 +19,7 @@
                         </a-col>
                         <!-- Post Button -->
                         <a-col :xs="22" :md="4">
-                            <a-button style="margin-top: 7px;" type="primary" :disabled="postContent.length > 120 || postContent.length <= 0" block @click="post">Post</a-button>
+                            <a-button style="margin-top: 7px;" type="primary" :disabled="postContent.length > 120 || postContent.length <= 0 || disabled" block @click="post">Post</a-button>
                         </a-col>
                         <a-col :xs="2" :md="0"></a-col>
                     </a-row>
@@ -41,7 +41,8 @@ export default {
     data(){
         return{
             postContent: '',
-            update: 0
+            update: 0,
+            disabled: false
         }
     },
     computed:{
@@ -63,7 +64,9 @@ export default {
     },
     methods: {
         post(){
+            this.disabled = true
             if(this.postContent.length > 120 || this.postContent.length <= 0){
+                this.disabled = false
                 return
             }
 

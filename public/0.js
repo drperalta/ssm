@@ -84,6 +84,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
@@ -109,7 +111,12 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   methods: {
-    post: function post() {// 
+    post: function post() {
+      if (this.postContent.length > 120) {
+        return;
+      }
+
+      console.log('HAHAHAH');
     }
   }
 });
@@ -348,7 +355,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, ".post-component .ant-card-body {\n  padding: 16px 16px 10px 16px;\n}\n.post-component .float-left {\n  float: left !important;\n}\n", ""]);
+exports.push([module.i, ".post-component .ant-card-body {\n  padding: 16px 16px 10px 16px;\n}\n.post-component .ant-card-body .ant-form-item {\n  margin: 0px;\n}\n.post-component .float-left {\n  float: left !important;\n}\n", ""]);
 
 // exports
 
@@ -661,20 +668,34 @@ var render = function() {
                         "a-col",
                         { attrs: { xs: 22, md: 18 } },
                         [
-                          _c("a-textarea", {
-                            attrs: {
-                              autosize: "",
-                              placeholder: "What's happening?",
-                              rows: 2
+                          _c(
+                            "a-form-item",
+                            {
+                              attrs: {
+                                validateStatus:
+                                  _vm.postCountentProgressStatus === "exception"
+                                    ? "error"
+                                    : ""
+                              }
                             },
-                            model: {
-                              value: _vm.postContent,
-                              callback: function($$v) {
-                                _vm.postContent = $$v
-                              },
-                              expression: "postContent"
-                            }
-                          }),
+                            [
+                              _c("a-textarea", {
+                                attrs: {
+                                  autosize: "",
+                                  placeholder: "What's happening?",
+                                  rows: 2
+                                },
+                                model: {
+                                  value: _vm.postContent,
+                                  callback: function($$v) {
+                                    _vm.postContent = $$v
+                                  },
+                                  expression: "postContent"
+                                }
+                              })
+                            ],
+                            1
+                          ),
                           _vm._v(" "),
                           _c(
                             "div",
@@ -695,7 +716,7 @@ var render = function() {
                       _c("a-col", { attrs: { xs: 2 } }, [
                         _c(
                           "div",
-                          { staticStyle: { padding: "5px" } },
+                          { staticStyle: { padding: "10px 5px" } },
                           [
                             _c("a-progress", {
                               attrs: {
@@ -718,6 +739,7 @@ var render = function() {
                           _c(
                             "a-button",
                             {
+                              staticStyle: { "margin-top": "7px" },
                               attrs: {
                                 type: "primary",
                                 disabled: _vm.postContent.length > 120,

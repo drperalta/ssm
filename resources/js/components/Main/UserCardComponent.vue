@@ -4,9 +4,9 @@
             <!-- User Image -->
             <a-avatar class="avatar" :size="50" icon="user" />
             <!-- Fullname -->
-            <h3 class="m0">David Peralta</h3>
+            <h3 class="m0">{{ user.fullname }}</h3>
             <!-- Username -->
-            <span>@peraltadavidr</span>
+            <span>@{{ user.username }}</span>
         </a-card>
     </div>
 </template>
@@ -16,6 +16,11 @@ export default {
     data(){
         return{
 
+        }
+    },
+    computed:{
+        user(){
+            return this.$store.state.information
         }
     }
 }

@@ -30,7 +30,7 @@
                     </a-col>
                     <!-- Post Time -->
                     <a-col span="24">
-                        <span class="post-time">{{ timePosted(post.created_at) }} ago</span>
+                        <span class="post-time">{{ timePosted(post.created_at) }}</span>
                     </a-col>
                     <!-- Post Content -->
                     <a-col span="24">
@@ -43,6 +43,8 @@
 </template>
 
 <script>
+import moment from 'moment'
+
 export default {
     data(){
         return{
@@ -104,7 +106,7 @@ export default {
             return user_id == this.$store.state.information.id ? true : false
         },
         timePosted(created_at){
-
+            return moment(created_at).fromNow().
         }
     },
     created(){

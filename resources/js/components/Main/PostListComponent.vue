@@ -63,14 +63,12 @@ export default {
             Vue.post.get(this)
         },
         updatePost(){
-            this.updatingPosts = true
-            
             setTimeout(() =>{
                 Vue.post.update(this)
             }, 500)
         },
         deletePost(post_id){
-            console.log(post_id)
+            Vue.post.delete(this, post_id)
         },
         userPost(user_id){
             return user_id == this.$store.state.information.id ? true : false
@@ -81,7 +79,10 @@ export default {
         handleScroll (event) {
             window.onscroll = () => {
                 if ((window.innerHeight + window.scrollY) >= document.body.scrollHeight) {
-                    this.updatePost()
+                    if(this.$store.state.postPage < this.$store.state.postMaxPage && !this.updatingPosts){
+                        this.updatingPosts = true
+                        this.updatePost()
+                    }
                 }
             };
         }

@@ -51,7 +51,7 @@ class PostController extends Controller
         Post::create($request->all());
 
         return response()->json([
-            'message' => 'Successfully posted User!'
+            'message' => 'Successfully posted!'
         ], 201);
     }
 
@@ -96,7 +96,12 @@ class PostController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy(Post $post)
-    {
-        //
+    {   
+        $posts = Post::whereId($post->id);
+        $posts->delete();
+        
+        return response()->json([
+            'message' => 'Successfully deleted post!'
+        ], 201);
     }
 }

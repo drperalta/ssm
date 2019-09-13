@@ -8,7 +8,8 @@ const store = new Vuex.Store({
         loggedIn: !!localStorage.getItem('token'),
         information: {},
         posts: [],
-        postPage: 1
+        postPage: 1,
+        postMaxPage: 1
       },
     
       getters:{
@@ -25,6 +26,9 @@ const store = new Vuex.Store({
         },
         async updatePosts({commit}, payload) {
           commit('UPDATE_POSTS', await payload)
+        },
+        nextPage({commit}) {
+          commit('NEXT_PAGE')
         }
       },
     
@@ -45,8 +49,9 @@ const store = new Vuex.Store({
           payload.forEach(post => {
             state.posts.push(post) 
           })
-
-          state.postPage += 1;
+        },
+        NEXT_PAGE: (state) => {
+          state.postPage += 1
         }
       },
 })

@@ -14,6 +14,26 @@ export default function(Vue){
                 
                 context.postContent = ''
                 context.update += 1;
+
+                context.$message.success(result.data.message);
+            }
+            catch(err){
+                console.log(err)
+            }
+        },
+        async get(context){
+            try{
+                let posts = []
+
+                for(let i = 1; i <= context.$store.state.postPage; i++){
+                    const result = await axios.get(`/api/post?page=${i}`)
+                    result.data.data.data.forEach(post =>{
+                        posts.push(post)
+                    })
+                    context.$store.state.postMaxPage = result.data.data.last_page
+                }
+                context.$store.dispatch('setPosts', posts)
+                context.updatingPosts = false
             }
             catch(err){
                 console.log(err)
@@ -21,25 +41,30 @@ export default function(Vue){
         },
 
         async update(context){
-            const result = await axios.get(`/api/post?page=${context.$store.state.postPage}`)
-            context.$store.dispatch('updatePosts', result.data.data.data)
+            try{
+                context.$store.dispatch('nextPage')
 
-            context.updatingPosts = false
+                const result = await axios.get(`/api/post?page=${context.$store.state.postPage}`)
+                context.$store.dispatch('updatePosts', result.data.data.data)
+
+                context.updatingPosts = false
+            }
+            catch(err){
+                console.log(err)
+            }
         },
 
-        async get(context){
+        async delete(context, post_id){
+            try{
+                const result = await axios.delete(`/api/post/${post_id}`)
 
-            let posts = []
+                context.getPost();
 
-            for(let i = 1; i <= context.$store.state.postPage; i++){
-                const result = await axios.get(`/api/post?page=${i}`)
-                result.data.data.data.forEach(post =>{
-                    posts.push(post)
-                })
-                
+                context.$message.success(result.data.message);
             }
-            context.$store.dispatch('setPosts', posts)
-            context.updatingPosts = false
+            catch(err){
+                console.log(err)
+            }
         }
     }
 }

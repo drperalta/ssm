@@ -204,13 +204,12 @@ __webpack_require__.r(__webpack_exports__);
     updatePost: function updatePost() {
       var _this = this;
 
-      this.updatingPosts = true;
       Object(timers__WEBPACK_IMPORTED_MODULE_1__["setTimeout"])(function () {
         Vue.post.update(_this);
       }, 500);
     },
     deletePost: function deletePost(post_id) {
-      console.log(post_id);
+      Vue.post["delete"](this, post_id);
     },
     userPost: function userPost(user_id) {
       return user_id == this.$store.state.information.id ? true : false;
@@ -223,7 +222,11 @@ __webpack_require__.r(__webpack_exports__);
 
       window.onscroll = function () {
         if (window.innerHeight + window.scrollY >= document.body.scrollHeight) {
-          _this2.updatePost();
+          if (_this2.$store.state.postPage < _this2.$store.state.postMaxPage && !_this2.updatingPosts) {
+            _this2.updatingPosts = true;
+
+            _this2.updatePost();
+          }
         }
       };
     }

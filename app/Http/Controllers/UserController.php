@@ -8,7 +8,11 @@ use App\User;
 class UserController extends Controller
 {
     public function user()
-    {
-        return response()->json(['user' => auth()->user()->first(['fullname','username','email'])], 200);
+    {   
+        $id =  auth()->user()->id;
+        
+        $user = User::whereId($id)->get(['fullname','username','email']);
+
+        return response()->json($user[0], 200);
     }
 }

@@ -19,7 +19,7 @@
                         </a-col>
                         <!-- Post Button -->
                         <a-col :xs="22" :md="4">
-                            <a-button style="margin-top: 7px;" type="primary" :disabled="postContent.length > 120" block @click="post">Post</a-button>
+                            <a-button style="margin-top: 7px;" type="primary" :disabled="postContent.length > 120 || postContent.length <= 0" block @click="post">Post</a-button>
                         </a-col>
                         <a-col :xs="2" :md="0"></a-col>
                     </a-row>
@@ -59,10 +59,10 @@ export default {
     },
     methods: {
         post(){
-            if(this.postContent.length > 120){
+            if(this.postContent.length > 120 || this.postContent.length <= 0){
                 return
             }
-            
+
             console.log('HAHAHAH')
         }
     },

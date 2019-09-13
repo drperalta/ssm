@@ -5,7 +5,7 @@ export default function(Vue){
             try{
                 const result = await axios.get('/api/user/information')
 
-                context.$store.dispatch('setInformation', result.data.user)
+                context.$store.dispatch('setInformation', result.data)
                 context.loading = false;
             }
             catch(err){

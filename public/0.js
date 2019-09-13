@@ -112,7 +112,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     post: function post() {
-      if (this.postContent.length > 120) {
+      if (this.postContent.length > 120 || this.postContent.length <= 0) {
         return;
       }
 
@@ -742,7 +742,9 @@ var render = function() {
                               staticStyle: { "margin-top": "7px" },
                               attrs: {
                                 type: "primary",
-                                disabled: _vm.postContent.length > 120,
+                                disabled:
+                                  _vm.postContent.length > 120 ||
+                                  _vm.postContent.length <= 0,
                                 block: ""
                               },
                               on: { click: _vm.post }

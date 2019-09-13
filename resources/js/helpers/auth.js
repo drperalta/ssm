@@ -1,5 +1,3 @@
-import Axios from "axios"
-
 export default function(Vue){
     Vue.auth = {
         async register(context, payload){

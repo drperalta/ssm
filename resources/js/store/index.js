@@ -6,11 +6,11 @@ Vue.use(Vuex)
 const store = new Vuex.Store({
     state:{
         loggedIn: !!localStorage.getItem('token'),
-        user: {},
+        information: {},
       },
     
       getters:{
-        getInformation: state => state.user
+        getInformation: state => state.information
       },
       
       actions:{
@@ -27,7 +27,7 @@ const store = new Vuex.Store({
           state.isLoggedIn = false
         },
         SET_INFORMATION: (state, payload) => {
-          state.user = payload
+          state.information = payload
         },
       },
 })

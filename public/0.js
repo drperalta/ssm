@@ -240,6 +240,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {};
+  },
+  computed: {
+    user: function user() {
+      return this.$store.state.information;
+    }
   }
 });
 
@@ -287,6 +292,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 
 
 
@@ -297,7 +305,13 @@ __webpack_require__.r(__webpack_exports__);
     PostComponent: _components_Main_PostComponent__WEBPACK_IMPORTED_MODULE_2__["default"]
   },
   data: function data() {
-    return {};
+    return {
+      loading: true
+    };
+  },
+  methods: {},
+  beforeCreate: function beforeCreate() {
+    Vue.user.user(this);
   }
 });
 
@@ -391,7 +405,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".main-page .ant-layout-header {\n  height: 50px;\n  padding: 5px 10px;\n  line-height: 0;\n}\n.main-page .ant-layout-header .header {\n  max-width: 800px;\n  margin: 0 auto;\n}\n.main-page .ant-layout-content {\n  padding-top: 16px;\n}\n.main-page .ant-layout-content .content {\n  max-width: 800px;\n  margin: 0 auto;\n}\n", ""]);
+exports.push([module.i, ".main-page {\n  width: 100vw;\n  height: 100vh;\n}\n.main-page .ant-layout-header {\n  height: 50px;\n  padding: 5px 10px;\n  line-height: 0;\n}\n.main-page .ant-layout-header .header {\n  max-width: 800px;\n  margin: 0 auto;\n}\n.main-page .ant-layout-content {\n  padding-top: 16px;\n}\n.main-page .ant-layout-content .content {\n  max-width: 800px;\n  margin: 0 auto;\n}\n.main-page .spin-content {\n  border: 1px solid #91d5ff;\n  background-color: #e6f7ff;\n  padding: 30px;\n}\n", ""]);
 
 // exports
 
@@ -903,9 +917,9 @@ var render = function() {
             attrs: { size: 50, icon: "user" }
           }),
           _vm._v(" "),
-          _c("h3", { staticClass: "m0" }, [_vm._v("David Peralta")]),
+          _c("h3", { staticClass: "m0" }, [_vm._v(_vm._s(_vm.user.fullname))]),
           _vm._v(" "),
-          _c("span", [_vm._v("@peraltadavidr")])
+          _c("span", [_vm._v("@" + _vm._s(_vm.user.username))])
         ],
         1
       )
@@ -936,50 +950,70 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c(
-    "div",
-    { staticClass: "main-page" },
+    "a-spin",
+    { attrs: { spinning: _vm.loading } },
     [
+      _c("a-icon", {
+        staticStyle: { "font-size": "32px" },
+        attrs: { slot: "indicator", type: "loading", spin: "" },
+        slot: "indicator"
+      }),
+      _vm._v(" "),
       _c(
-        "a-layout",
-        { staticStyle: { background: "transparent" } },
+        "div",
+        { staticClass: "main-page" },
         [
-          _c("a-layout-header", [
-            _c("div", { staticClass: "header" }, [_c("NavbarComponent")], 1)
-          ]),
-          _vm._v(" "),
-          _c("a-layout-content", [
-            _c(
-              "div",
-              { staticClass: "content p1" },
-              [
-                _c(
-                  "a-row",
-                  { attrs: { gutter: 16 } },
-                  [
+          !_vm.loading
+            ? _c(
+                "a-layout",
+                { staticStyle: { background: "transparent" } },
+                [
+                  _c("a-layout-header", [
                     _c(
-                      "a-col",
-                      { attrs: { xs: 24, sm: 9 } },
-                      [_c("UserCardComponent")],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c("a-col", { attrs: { xs: 24, sm: 0 } }, [
-                      _c("div", { staticStyle: { margin: "8px" } })
-                    ]),
-                    _vm._v(" "),
-                    _c(
-                      "a-col",
-                      { attrs: { xs: 24, sm: 15 } },
-                      [_c("PostComponent")],
+                      "div",
+                      { staticClass: "header" },
+                      [_c("NavbarComponent")],
                       1
                     )
-                  ],
-                  1
-                )
-              ],
-              1
-            )
-          ])
+                  ]),
+                  _vm._v(" "),
+                  _c("a-layout-content", [
+                    _c(
+                      "div",
+                      { staticClass: "content p1" },
+                      [
+                        _c(
+                          "a-row",
+                          { attrs: { gutter: 16 } },
+                          [
+                            _c(
+                              "a-col",
+                              { attrs: { xs: 24, sm: 9 } },
+                              [_c("UserCardComponent")],
+                              1
+                            ),
+                            _vm._v(" "),
+                            _c("a-col", { attrs: { xs: 24, sm: 0 } }, [
+                              _c("div", { staticStyle: { margin: "8px" } })
+                            ]),
+                            _vm._v(" "),
+                            _c(
+                              "a-col",
+                              { attrs: { xs: 24, sm: 15 } },
+                              [_c("PostComponent")],
+                              1
+                            )
+                          ],
+                          1
+                        )
+                      ],
+                      1
+                    )
+                  ])
+                ],
+                1
+              )
+            : _vm._e()
         ],
         1
       )

@@ -7,5 +7,8 @@ use App\User;
 
 class UserController extends Controller
 {
-    
+    public function user()
+    {
+        return response()->json(['user' => auth()->user()], 200);
+    }
 }

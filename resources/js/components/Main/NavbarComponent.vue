@@ -26,7 +26,7 @@ export default {
     },
     methods: {
         logout(){
-
+            Vue.auth.logout(this)
         }
     }
 }

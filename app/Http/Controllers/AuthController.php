@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 use App\User;
+use Carbon\Carbon;
 
 class AuthController extends Controller
 {
@@ -37,7 +39,40 @@ class AuthController extends Controller
             'password' => 'required|max:255'
         ]);
 
-        return $request->all();
+        $credentials = [
+            'username' => $request->username,
+            'password' => $request->password
+        ];
 
+        if (auth()->attempt($credentials)) {
+
+            $user = $request->user();
+
+            $tokenResult = $user->createToken('Personal Access Token');
+
+            $token = $tokenResult->token;
+            $token->expires_at = Carbon::now()->addWeek()->setTimezone('GMT+8');
+            $token->save();
+
+            return response()->json([
+                'access_token' => $tokenResult->accessToken,
+                'token_type' => 'Bearer',
+                'expires_at' => Carbon::parse(
+                    $tokenResult->token->expires_at
+                )->toDateTimeString()
+            ], 200);    
+
+        } else {
+            return response()->json(['error' => 'Invalid username or password'], 401);
+        }
+    }
+
+    public function logout(Request $request)
+    {   
+        $request->user()->token()->revoke();
+
+        return response()->json([
+            'message' => 'Successfully logged out'
+        ], 200);
     }
 }

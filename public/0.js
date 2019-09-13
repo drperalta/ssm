@@ -33,7 +33,9 @@ __webpack_require__.r(__webpack_exports__);
     return {};
   },
   methods: {
-    logout: function logout() {}
+    logout: function logout() {
+      Vue.auth.logout(this);
+    }
   }
 });
 

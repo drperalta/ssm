@@ -126,6 +126,8 @@ export default {
         margin-top: 8px;
         font-size: 15px;
         font-weight: 400;
+        max-width:400px; 
+        word-wrap:break-word;
     }
     .post-options{
         float: right;

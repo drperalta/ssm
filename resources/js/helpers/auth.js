@@ -26,7 +26,6 @@ export default function(Vue){
                 context.$store.commit('LOGIN')
 
                 context.$router.go({ name: 'Main' })
-                context.disabled = false
             }
             catch(err){
                 context.alert.error = err.response.data.error;

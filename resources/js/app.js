@@ -18,6 +18,9 @@ window.axios=axios
 // Ant Design Vue
 import './plugins/ant-design'
 
+// Laravel Echo
+import './plugins/laravel-echo'
+
 // Helpers
 import Auth from './helpers/auth'
 Vue.use(Auth)

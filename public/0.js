@@ -126,6 +126,15 @@ __webpack_require__.r(__webpack_exports__);
 
       Vue.post.post(this, this.postContent);
     }
+  },
+  created: function created() {
+    var vm = this;
+    Echo.channel('public-feed').listen('PostEvent', function (e) {
+      vm.update += 1;
+    });
+    Echo.channel('public-feed').listen('DeletePostEvent', function (e) {
+      vm.update += 1;
+    });
   }
 });
 

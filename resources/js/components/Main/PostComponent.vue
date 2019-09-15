@@ -72,6 +72,18 @@ export default {
 
             Vue.post.post(this, this.postContent)
         },
+    },
+    created(){
+        let vm = this
+
+        Echo.channel('public-feed')
+            .listen('PostEvent', (e) => {
+                vm.update += 1
+            })
+        Echo.channel('public-feed')
+            .listen('DeletePostEvent', (e) => {
+                vm.update += 1
+            })
     }
 }
 </script>

@@ -26,6 +26,8 @@
         "vuex": "^3.1.1"
     },
     "dependencies": {
-        "moment": "^2.24.0"
+        "laravel-echo": "^1.5.4",
+        "moment": "^2.24.0",
+        "pusher-js": "^5.0.1"
     }
 }

@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\DeletePostEvent;
+use App\Events\PostEvent;
 use App\Post;
 use Illuminate\Http\Request;
 
@@ -48,7 +50,9 @@ class PostController extends Controller
             'user_id' => 'required'
         ]);
 
-        Post::create($request->all());
+        $post = Post::create($request->all());
+        
+        event(new PostEvent($post));
 
         return response()->json([
             'message' => 'Successfully posted!'
@@ -99,7 +103,11 @@ class PostController extends Controller
     {   
         $posts = Post::whereId($post->id);
         $posts->delete();
+
+        event(new DeletePostEvent());
+
         
+
         return response()->json([
             'message' => 'Successfully deleted post!'
         ], 201);

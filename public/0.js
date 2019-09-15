@@ -239,10 +239,10 @@ __webpack_require__.r(__webpack_exports__);
 
       window.onscroll = function () {
         if (window.innerHeight + window.scrollY >= document.body.scrollHeight) {
-          if (_this2.$store.state.postPage < _this2.$store.state.postMaxPage && !_this2.updatingPosts) {
-            _this2.updatingPosts = true;
-
+          if (_this2.$store.state.postPage < _this2.$store.state.postMaxPage) {
             _this2.updatePost();
+          } else {
+            _this2.updatingPosts = false;
           }
         }
       };

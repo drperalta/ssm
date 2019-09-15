@@ -83,9 +83,10 @@ export default {
         handleScroll (event) {
             window.onscroll = () => {
                 if ((window.innerHeight + window.scrollY) >= document.body.scrollHeight) {
-                    if(this.$store.state.postPage < this.$store.state.postMaxPage && !this.updatingPosts){
-                        this.updatingPosts = true
+                    if(this.$store.state.postPage < this.$store.state.postMaxPage){
                         this.updatePost()
+                    }else{
+                        this.updatingPosts = false
                     }
                 }
             };

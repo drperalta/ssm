@@ -35,7 +35,6 @@ export default function(Vue){
                     context.$store.state.postMaxPage = result.data.data.last_page
                 }
                 context.$store.dispatch('setPosts', posts)
-                context.updatingPosts = false
             }
             catch(err){
                 console.log(err)
@@ -48,8 +47,6 @@ export default function(Vue){
 
                 const result = await axios.get(`/api/post?page=${context.$store.state.postPage}`)
                 context.$store.dispatch('updatePosts', result.data.data.data)
-
-                context.updatingPosts = false
             }
             catch(err){
                 console.log(err)

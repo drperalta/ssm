@@ -201,13 +201,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
-    return {
-      updatingPosts: true
-    };
+    return {};
   },
   computed: {
     posts: function posts() {
@@ -241,8 +240,6 @@ __webpack_require__.r(__webpack_exports__);
         if (window.innerHeight + window.scrollY >= document.body.scrollHeight) {
           if (_this2.$store.state.postPage < _this2.$store.state.postMaxPage) {
             _this2.updatePost();
-          } else {
-            _this2.updatingPosts = false;
           }
         }
       };
@@ -410,7 +407,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, ".post-list-component .ant-card-body {\n  padding: 15px !important;\n}\n.post-list-component .card {\n  margin: 8px 0px;\n}\n.post-list-component .fullname {\n  font-weight: 600;\n}\n.post-list-component .username {\n  color: #919191;\n}\n.post-list-component .post-time {\n  color: #919191;\n  font-size: 12px;\n}\n.post-list-component .post-content {\n  margin-top: 8px;\n  font-size: 15px;\n  font-weight: 400;\n  max-width: 400px;\n  word-wrap: break-word;\n}\n.post-list-component .post-options {\n  float: right;\n  position: absolute;\n}\n.post-list-component .row {\n  margin-left: 48px;\n}\n.post-list-component .ant-col-18 {\n  line-height: 1;\n}\n.post-list-component .no-post {\n  padding-top: 20px;\n  text-align: center;\n  margin: 0 auto;\n}\n.post-list-component .no-post .logo {\n  width: 80px;\n  opacity: 0.4;\n}\n.post-list-component .no-post p {\n  color: #adadad;\n  font-size: 14px;\n}\n.spin {\n  text-align: center;\n  border-radius: 4px;\n  margin-bottom: 20px;\n  padding: 30px 50px;\n}\n", ""]);
+exports.push([module.i, ".post-list-component .ant-card-body {\n  padding: 15px !important;\n}\n.post-list-component .card {\n  margin: 8px 0px;\n}\n.post-list-component .fullname {\n  font-weight: 600;\n}\n.post-list-component .username {\n  color: #919191;\n}\n.post-list-component .post-time {\n  color: #919191;\n  font-size: 12px;\n}\n.post-list-component .post-content {\n  margin-top: 8px;\n  font-size: 15px;\n  font-weight: 400;\n  max-width: 400px;\n  word-wrap: break-word;\n}\n.post-list-component .post-options {\n  float: right;\n  position: absolute;\n}\n.post-list-component .row {\n  margin-left: 48px;\n}\n.post-list-component .ant-col-18 {\n  line-height: 1;\n}\n.post-list-component .no-post {\n  padding-top: 20px;\n  text-align: center;\n  margin: 0 auto;\n}\n.post-list-component .no-post .logo {\n  width: 80px;\n  opacity: 0.4;\n}\n.post-list-component .no-post p {\n  color: #adadad;\n  font-size: 14px;\n}\n.post-list-component .ant-divider-inner-text {\n  font-weight: 400;\n  font-size: 13px;\n  color: #a3a3a3;\n}\n.spin {\n  text-align: center;\n  border-radius: 4px;\n  margin-bottom: 20px;\n  padding: 30px 50px;\n}\n", ""]);
 
 // exports
 
@@ -974,8 +971,15 @@ var render = function() {
         ])
       }),
       _vm._v(" "),
-      _vm.updatingPosts
+      this.$store.state.postPage < this.$store.state.postMaxPage &&
+      _vm.posts.length > 0
         ? _c("div", { staticClass: "spin" }, [_c("a-spin")], 1)
+        : _vm._e(),
+      _vm._v(" "),
+      this.$store.state.postPage == this.$store.state.postMaxPage
+        ? _c("a-divider", [
+            _vm._v("I'm glad you came here but there no more post to show")
+          ])
         : _vm._e()
     ],
     2

@@ -40,9 +40,10 @@
                 </a-row>
             </span>
         </a-card>
-        <div class="spin" v-if="updatingPosts">
+        <div class="spin" v-if="this.$store.state.postPage < this.$store.state.postMaxPage && posts.length > 0">
             <a-spin />
         </div>
+        <a-divider v-if="this.$store.state.postPage == this.$store.state.postMaxPage">I'm glad you came here but there no more post to show</a-divider>
     </div>
 </template>
 
@@ -54,7 +55,7 @@ export default {
     
     data(){
         return{
-            updatingPosts: true,
+            
         }
     },
     computed:{
@@ -85,8 +86,6 @@ export default {
                 if ((window.innerHeight + window.scrollY) >= document.body.scrollHeight) {
                     if(this.$store.state.postPage < this.$store.state.postMaxPage){
                         this.updatePost()
-                    }else{
-                        this.updatingPosts = false
                     }
                 }
             };
@@ -152,6 +151,11 @@ export default {
             color: rgb(173, 173, 173);
             font-size: 14px;
         }
+    }
+    .ant-divider-inner-text{
+        font-weight: 400;
+        font-size: 13px;
+        color: rgb(163, 163, 163);
     }
 }
 

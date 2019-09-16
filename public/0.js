@@ -129,9 +129,6 @@ __webpack_require__.r(__webpack_exports__);
   },
   created: function created() {
     var vm = this;
-    Echo.channel('public-feed').listen('PostEvent', function (e) {
-      vm.update += 1;
-    });
     Echo.channel('public-feed').listen('DeletePostEvent', function (e) {
       vm.update += 1;
     });
@@ -202,12 +199,17 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      lastPost: false
+      lastPost: false,
+      newPosts: 0
     };
   },
   computed: {
@@ -218,6 +220,7 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     getPost: function getPost() {
       Vue.post.get(this);
+      this.newPosts = 0;
     },
     updatePost: function updatePost() {
       var _this = this;
@@ -252,7 +255,18 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   created: function created() {
-    this.getPost();
+    var _this3 = this;
+
+    var vm = this;
+    Echo.channel('public-feed').listen('PostEvent', function (e) {
+      if (e.post.user_id != _this3.$store.state.information.id) {
+        vm.newPosts += 1;
+      }
+    });
+    Echo.channel('public-feed').listen('DeletePostEvent', function (e) {
+      vm.newPosts -= 1;
+    });
+    vm.getPost();
     window.addEventListener('scroll', this.handleScroll);
   },
   destroyed: function destroyed() {
@@ -850,6 +864,25 @@ var render = function() {
     "div",
     { staticClass: "post-list-component" },
     [
+      _vm.newPosts > 0
+        ? _c(
+            "div",
+            { staticClass: "mt1" },
+            [
+              _c("a-alert", {
+                attrs: {
+                  message: "There are " + _vm.newPosts + " new posts",
+                  type: "info",
+                  closeText: "Show posts",
+                  closable: ""
+                },
+                on: { close: _vm.getPost }
+              })
+            ],
+            1
+          )
+        : _vm._e(),
+      _vm._v(" "),
       _vm.posts.length == 0
         ? _c("div", { staticClass: "no-post" }, [
             _c("img", {

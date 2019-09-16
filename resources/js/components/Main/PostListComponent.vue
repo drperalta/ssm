@@ -1,5 +1,9 @@
 <template>
     <div class="post-list-component">
+        <div class="mt1" v-if="newPosts > 0">
+            <a-alert :message="`There are ${newPosts} new posts`" type="info" closeText="Show posts" closable @close="getPost"/>
+        </div>
+
         <div class="no-post" v-if="posts.length == 0">
             <img class="logo" src="../../../assets/img/ssm-logo-shadow.png" alt="">
             <p>No post available to show</p>
@@ -56,6 +60,7 @@ export default {
     data(){
         return{
             lastPost: false,
+            newPosts: 0,
         }
     },
     computed:{
@@ -66,6 +71,7 @@ export default {
     methods: {
         getPost(){
             Vue.post.get(this)
+            this.newPosts = 0;
         },
         updatePost(){
             setTimeout(() =>{
@@ -96,7 +102,21 @@ export default {
         }
     },
     created(){
-        this.getPost();
+        let vm = this
+
+        Echo.channel('public-feed')
+            .listen('PostEvent', (e) => {
+                if(e.post.user_id != this.$store.state.information.id){
+                    vm.newPosts += 1
+                }
+                
+            })
+        Echo.channel('public-feed')
+            .listen('DeletePostEvent', (e) => {
+                vm.newPosts -= 1
+            })
+            
+        vm.getPost();
         window.addEventListener('scroll', this.handleScroll);
     },
     destroyed () {

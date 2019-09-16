@@ -13,7 +13,7 @@ Once you download this folder you will need to prepare a few things before you a
 5. Run `php artisan key:generate` to create a new encryption key
 6. Open the project and edit the .env file to add database settings to your project. Take note of the database name, password, and username to make sure they match your system's settings. Change any other environment settings you desire.
 7. Back in the terminal, run `php artisan migrate` to migrate your database
-8. Run php `artisan passport:install` to install and generate passport keys
+8. Run `php artisan passport:install` to install and generate passport keys
 
 Congratulations! You should now be ready to try Simplified Social Media.
 

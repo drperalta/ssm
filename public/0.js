@@ -206,7 +206,9 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
-    return {};
+    return {
+      lastPost: false
+    };
   },
   computed: {
     posts: function posts() {
@@ -240,6 +242,10 @@ __webpack_require__.r(__webpack_exports__);
         if (window.innerHeight + window.scrollY >= document.body.scrollHeight) {
           if (_this2.$store.state.postPage < _this2.$store.state.postMaxPage) {
             _this2.updatePost();
+          }
+
+          if (_this2.$store.state.postPage == _this2.$store.state.postMaxPage) {
+            _this2.lastPost = true;
           }
         }
       };
@@ -976,7 +982,7 @@ var render = function() {
         ? _c("div", { staticClass: "spin" }, [_c("a-spin")], 1)
         : _vm._e(),
       _vm._v(" "),
-      this.$store.state.postPage == this.$store.state.postMaxPage
+      _vm.lastPost
         ? _c("a-divider", [
             _vm._v("I'm glad you came here but there no more post to show")
           ])

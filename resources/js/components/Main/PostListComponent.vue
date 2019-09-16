@@ -43,7 +43,7 @@
         <div class="spin" v-if="this.$store.state.postPage < this.$store.state.postMaxPage && posts.length > 0">
             <a-spin />
         </div>
-        <a-divider v-if="this.$store.state.postPage == this.$store.state.postMaxPage">I'm glad you came here but there no more post to show</a-divider>
+        <a-divider v-if="lastPost">I'm glad you came here but there no more post to show</a-divider>
     </div>
 </template>
 
@@ -55,7 +55,7 @@ export default {
     
     data(){
         return{
-            
+            lastPost: false,
         }
     },
     computed:{
@@ -86,6 +86,10 @@ export default {
                 if ((window.innerHeight + window.scrollY) >= document.body.scrollHeight) {
                     if(this.$store.state.postPage < this.$store.state.postMaxPage){
                         this.updatePost()
+                    }
+
+                    if(this.$store.state.postPage == this.$store.state.postMaxPage){
+                        this.lastPost = true
                     }
                 }
             };
